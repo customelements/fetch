@@ -8,10 +8,11 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "hapi": "^8.2.0"
+    "hapi": "^8.2.0",
+    "request": "^2.53.0"
   },
   "engines": {
-    "node": "0.12.x"
+    "node": "0.11.x"
   },
   "repository": {
     "type": "git",
