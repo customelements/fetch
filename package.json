@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "fetch",
+  "version": "0.0.0",
+  "description": "Fetch packages from Bower that contains the web-components keyword",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "0.12.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/customelements/fetch.git"
+  }
+}
