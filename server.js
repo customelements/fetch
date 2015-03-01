@@ -1,5 +1,6 @@
-// -- Setup --------------------------------------------------------------------
 var Hapi = require('hapi');
+
+// -- Setup --------------------------------------------------------------------
 
 var server = new Hapi.Server();
 
@@ -19,6 +20,20 @@ server.route({
 
 // -- Start --------------------------------------------------------------------
 
-server.start(function () {
-    console.log('Server running at:', server.info.uri);
+server.register({
+    register: require('good'),
+    options: {
+        reporters: [{
+            reporter: require('good-console'),
+            args:[{ log: '*', response: '*' }]
+        }]
+    }
+}, function (err) {
+    if (err) {
+        throw err;
+    }
+
+    server.start(function () {
+        server.log('info', 'Server running at: ' + server.info.uri);
+    });
 });

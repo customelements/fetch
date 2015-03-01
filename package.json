@@ -8,6 +8,8 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "good": "^5.1.2",
+    "good-console": "^4.1.0",
     "hapi": "^8.2.0",
     "request": "^2.53.0"
   },
