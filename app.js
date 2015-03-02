@@ -1,6 +1,6 @@
 var boom = require('boom');
-var env = require('./config/env.js');
-var fetch = require('./fetch');
+var env = require('./config/env');
+var fetch = require('./util/fetch');
 var GitHub = require('github');
 
 module.exports = function(request, reply) {
