@@ -2,6 +2,7 @@ var boom = require('boom');
 var env = require('./config/env');
 var fetch = require('./util/fetch');
 var github = require('./config/github');
+var Package = require('./model/package');
 
 module.exports = function(request, reply) {
     fetch('https://bower-component-list.herokuapp.com/keyword/web-components')
@@ -15,36 +16,38 @@ function reduce(data) {
     var reducedData = [];
 
     data.forEach(function(elem) {
-        reducedData.push({
-            name: elem.name,
-            owner: elem.owner,
-            keywords: elem.keywords
-        });
+        reducedData.push(
+            new Package({
+                name: elem.name,
+                keywords: elem.keywords,
+                github_url: elem.website
+            })
+        );
     });
 
     return reducedData;
 }
 
-function combine(repos) {
+function combine(packages) {
     var promises = [];
 
-    repos.forEach(function(repo) {
+    packages.forEach(function(pkg) {
         promises.push(
-            getRepoFromGithub(repo)
+            getRepoFromGithub(pkg.toJSON())
         );
     });
 
     return Promise.all(promises);
 }
 
-function getRepoFromGithub(repo) {
+function getRepoFromGithub(pkg) {
     return new Promise(function(resolve, reject) {
         github().repos.get({
-            user: repo.owner,
-            repo: repo.name
+            user: pkg.github_owner,
+            repo: pkg.github_repo
         }, function(error, result) {
             if (error) {
-                reject(boom.create(error.code, 'Error when requesting repo: ' + repo.owner + '/' + repo.name));
+                reject(boom.create(parseInt(error.code, 10), 'Error when requesting repo: ' + pkg.github_owner + '/' + pkg.github_repo));
             }
 
             resolve(result);
