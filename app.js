@@ -1,7 +1,7 @@
-var get = require('./get');
+var fetch = require('./fetch');
 
 module.exports = function (request, reply) {
-    get('https://bower-component-list.herokuapp.com/keyword/web-components')
+    fetch('https://bower-component-list.herokuapp.com/keyword/web-components')
         .then(function(result) {
             reply(result);
         })
