@@ -40,28 +40,46 @@ describe('Repository', function() {
 
             assert.property(repo, 'bower_name');
             assert.property(repo, 'bower_keywords');
-
-            assert.property(repo, 'npm_name');
-            assert.property(repo, 'npm_keywords');
         });
     });
 
     describe('#toJSON', function() {
-        var options = {
-            name: 'voice-elements',
-            keywords: ['polymer'],
-            github_url: 'https://github.com/zenorocha/voice-elements'
-        };
+        var options = require('../fixtures/repository');
 
         it('returns object as json', function() {
-            var pkg = new Package(options);
-            var json = pkg.toJSON();
+            var repo = new Repository(options);
+            var json = repo.toJSON();
 
+            assert.equal(json.id, options.id);
             assert.equal(json.name, options.name);
-            assert.equal(json.keywords, options.keywords);
-            assert.equal(json.url, options.url);
-            assert.equal(json.github_owner, 'zenorocha');
-            assert.equal(json.github_repo, 'voice-elements');
+            assert.equal(json.full_name, options.full_name);
+            assert.equal(json.description, options.description);
+            assert.equal(json.html_url, options.html_url);
+            assert.equal(json.homepage, options.homepage);
+            assert.equal(json.size, options.size);
+
+            assert.equal(json.created_at, options.created_at);
+            assert.equal(json.updated_at, options.updated_at);
+            assert.equal(json.pushed_at, options.pushed_at);
+
+            assert.equal(json.subscribers_count, options.subscribers_count);
+            assert.equal(json.open_issues_count, options.open_issues_count);
+            assert.equal(json.stargazers_count, options.stargazers_count);
+            assert.equal(json.watchers_count, options.watchers_count);
+            assert.equal(json.forks_count, options.forks_count);
+
+            assert.equal(json.has_issues, options.has_issues);
+            assert.equal(json.has_downloads, options.has_downloads);
+            assert.equal(json.has_wiki, options.has_wiki);
+            assert.equal(json.has_pages, options.has_pages);
+
+            assert.equal(json.owner_id, options.owner.id);
+            assert.equal(json.owner_login, options.owner.login);
+            assert.equal(json.owner_avatar_url, options.owner.avatar_url);
+            assert.equal(json.owner_html_url, options.owner.html_url);
+
+            assert.equal(json.bower_name, options.bower_name);
+            assert.equal(json.bower_keywords, options.bower_keywords);
         });
     });
 });

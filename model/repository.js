@@ -30,6 +30,7 @@ function Repository(options) {
     this.owner_avatar_url = options.owner.avatar_url || '';
     this.owner_html_url = options.owner.html_url || '';
 
+    this.bower_name = options.bower_name || '';
     this.bower_keywords = options.bower_keywords || [];
 }
 
@@ -63,6 +64,7 @@ Repository.prototype.toJSON = function() {
         owner_avatar_url: this.owner_avatar_url,
         owner_html_url: this.owner_html_url,
 
+        bower_name: this.bower_name,
         bower_keywords: this.bower_keywords
     };
 };
