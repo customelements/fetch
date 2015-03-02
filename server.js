@@ -1,3 +1,4 @@
+var env = require('./config/env.js');
 var Hapi = require('hapi');
 
 // -- Setup --------------------------------------------------------------------
@@ -5,7 +6,7 @@ var Hapi = require('hapi');
 var server = new Hapi.Server();
 
 server.connection({
-    port: process.env.PORT || 3000
+    port: env.PORT
 });
 
 // -- Routes -------------------------------------------------------------------
