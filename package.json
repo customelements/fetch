@@ -5,7 +5,8 @@
   "description": "Fetch packages from Bower that contains the web-components keyword",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "mocha test/*"
   },
   "dependencies": {
     "boom": "^2.6.1",
@@ -14,6 +15,10 @@
     "good-console": "^4.1.0",
     "hapi": "^8.2.0",
     "request": "^2.53.0"
+  },
+  "devDependencies": {
+    "chai": "^2.1.0",
+    "mocha": "^2.1.0"
   },
   "engines": {
     "node": "0.11.x"
