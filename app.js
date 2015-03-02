@@ -1,7 +1,7 @@
 var boom = require('boom');
 var env = require('./config/env');
 var fetch = require('./util/fetch');
-var GitHub = require('github');
+var github = require('./config/github');
 
 module.exports = function(request, reply) {
     fetch('https://bower-component-list.herokuapp.com/keyword/web-components')
@@ -27,28 +27,19 @@ function reduce(data) {
 
 function combine(repos) {
     var promises = [];
-    var github = new GitHub({
-        version: '3.0.0',
-    });
-
-    github.authenticate({
-        type: 'oauth',
-        key: env.GITHUB_CLIENT_ID,
-        secret: env.GITHUB_CLIENT_SECRET
-    });
 
     repos.forEach(function(repo) {
         promises.push(
-            getRepoFromGithub(github, repo)
+            getRepoFromGithub(repo)
         );
     });
 
     return Promise.all(promises);
 }
 
-function getRepoFromGithub(github, repo) {
+function getRepoFromGithub(repo) {
     return new Promise(function(resolve, reject) {
-        github.repos.get({
+        github().repos.get({
             user: repo.owner,
             repo: repo.name
         }, function(error, result) {
