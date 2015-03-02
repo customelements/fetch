@@ -13,9 +13,9 @@ server.connection({
 
 server.route({
     method: 'GET',
-    path: '/bower',
+    path: '/packages/bower',
     config: {
-        handler: require('./api/bower.js')
+        handler: require('./routes/packages/bower.js')
     }
 });
 
