@@ -18,10 +18,12 @@ Package.prototype.githubRepo = function() {
 
 Package.prototype.toJSON = function() {
     return {
-        name         : this.name,
-        keywords     : this.keywords,
-        github_owner : this.githubOwner(),
-        github_repo  : this.githubRepo()
+        name: this.name,
+        keywords: this.keywords,
+        github_repo: {
+            owner: this.githubOwner(),
+            name: this.githubRepo()
+        }
     };
 };
 

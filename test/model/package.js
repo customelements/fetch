@@ -56,9 +56,8 @@ describe('Package', function() {
 
             assert.equal(json.name, options.name);
             assert.equal(json.keywords, options.keywords);
-            assert.equal(json.url, options.url);
-            assert.equal(json.github_owner, 'zenorocha');
-            assert.equal(json.github_repo, 'voice-elements');
+            assert.equal(json.github_repo.owner, 'zenorocha');
+            assert.equal(json.github_repo.name, 'voice-elements');
         });
     });
 });
