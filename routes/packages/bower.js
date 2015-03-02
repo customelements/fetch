@@ -1,5 +1,5 @@
-var fetch = require('../../util/fetch');
-var Package = require('../../model/package');
+var fetch = require('../../utils/fetch');
+var Package = require('../../models/package');
 
 module.exports = function(request, reply) {
     fetch('https://bower-component-list.herokuapp.com/keyword/web-components')

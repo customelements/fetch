@@ -1,4 +1,4 @@
-var env = require('./config/env.js');
+var env = require('./configs/env.js');
 var Hapi = require('hapi');
 
 // -- Setup --------------------------------------------------------------------
