@@ -1,11 +1,22 @@
 var fetch = require('./fetch');
 
-module.exports = function (request, reply) {
+module.exports = function(request, reply) {
     fetch('https://bower-component-list.herokuapp.com/keyword/web-components')
-        .then(function(result) {
-            reply(result);
-        })
-        .catch(function(error) {
-            reply(error);
-        });
+        .then(reduce)
+        .then(reply)
+        .catch(reply);
 };
+
+function reduce(data) {
+    var reducedData = [];
+
+    data.forEach(function(elem) {
+        reducedData.push({
+            name: elem.name,
+            owner: elem.owner,
+            keywords: elem.keywords
+        });
+    });
+
+    return reducedData;
+}
