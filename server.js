@@ -19,6 +19,14 @@ server.route({
     }
 });
 
+server.route({
+    method: 'GET',
+    path: '/repos/bower',
+    config: {
+        handler: require('./routes/repos/bower.js')
+    }
+});
+
 // -- Start --------------------------------------------------------------------
 
 server.register({
