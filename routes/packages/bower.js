@@ -3,8 +3,14 @@ var Package = require('../../model/package');
 
 module.exports = function(request, reply) {
     fetch('https://bower-component-list.herokuapp.com/keyword/web-components')
-        .then(reduce)
-        .then(reply)
+        .then(function(result) {
+            request.log(['promise'], 'Done with #fetch');
+            return reduce(result);
+        })
+        .then(function(result) {
+            request.log(['promise'], 'Done with #reduce');
+            return reply(result);
+        })
         .catch(reply);
 };
 
