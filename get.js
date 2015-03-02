@@ -1,3 +1,4 @@
+var boom = require('boom');
 var request = require('request');
 
 module.exports = function(url) {
@@ -7,10 +8,14 @@ module.exports = function(url) {
             json: true
         }, function (error, response, body) {
             if (error) {
-                reject(error);
+                reject(boom.wrap(error));
             }
-
-            resolve(body);
+            else if (response.statusCode !== 200) {
+                reject(boom.create(response.statusCode, 'Error when requesting URL: ' + url));
+            }
+            else {
+                resolve(body);
+            }
         });
     });
 };
