@@ -6,7 +6,7 @@
 
 > **Attention:** This is a work in progress.
 
-Microservices that fetches packages from [npm](https://www.npmjs.org/) & [Bower](http://bower.io/) which contains the `web-components` keyword.
+Microservices that fetches packages from [npm](https://www.npmjs.org/) & [Bower](http://bower.io/) which contains the `web-components` keyword. Built with [Node](http://nodejs.org/), [Hapi](http://hapijs.com/), and [Redis](http://redis.io/). Hosted on [Heroku](https://heroku.com/).
 
 ## APIs
 
