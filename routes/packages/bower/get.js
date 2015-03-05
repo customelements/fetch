@@ -21,7 +21,7 @@ function get(key, request) {
                 reject(boom.create(response.badData, 'Error when getting data from Redis into key: ' + key));
             }
 
-            resolve(result);
+            resolve(JSON.parse(result));
         });
     });
 }
