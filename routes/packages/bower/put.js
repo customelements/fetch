@@ -1,4 +1,4 @@
-var db = require('../../../configs/db');
+var db = require('../../../utils/db');
 var fetch = require('../../../utils/fetch');
 var Package = require('../../../models/package');
 
@@ -12,10 +12,10 @@ module.exports = function(request, reply) {
         })
         .then(function(result) {
             request.log(['#reduce'], 'Done with promise');
-            return save(result, request);
+            return db.set('packages:bower', result);
         })
         .then(function(result) {
-            request.log(['#save'], 'Done with promise');
+            request.log(['#db.set'], 'Done with promise');
             return reply(result);
         })
         .catch(reply);
@@ -37,15 +37,4 @@ function reduce(data, request) {
     });
 
     return reducedData;
-}
-
-function save(data, request) {
-    return new Promise(function(resolve, reject) {
-        var dbKey = 'packages:bower';
-        db.set(dbKey, JSON.stringify(data));
-
-        request.log(['#save'], 'Save data in Redis into key: ' + dbKey);
-
-        resolve(data);
-    });
 }
