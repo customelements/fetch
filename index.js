@@ -28,6 +28,14 @@ server.route({
 });
 
 server.route({
+    method: 'GET',
+    path: '/repos/bower',
+    config: {
+        handler: require('./routes/repos/bower/get.js')
+    }
+});
+
+server.route({
     method: 'PUT',
     path: '/repos/bower',
     config: {
