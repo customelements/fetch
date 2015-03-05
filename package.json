@@ -1,11 +1,11 @@
 {
   "private": true,
   "name": "fetch",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Fetch packages from Bower that contains the web-components keyword",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node index.js",
     "test": "mocha tests/*"
   },
   "dependencies": {
