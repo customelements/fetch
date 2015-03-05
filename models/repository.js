@@ -25,10 +25,12 @@ function Repository(options) {
     this.has_wiki = options.has_wiki || false;
     this.has_pages = options.has_pages || false;
 
-    this.owner_id = options.owner.id || 0;
-    this.owner_login = options.owner.login || '';
-    this.owner_avatar_url = options.owner.avatar_url || '';
-    this.owner_html_url = options.owner.html_url || '';
+    this.owner = {
+        id: options.owner.id || 0,
+        login: options.owner.login || '',
+        avatar_url: options.owner.avatar_url || '',
+        html_url: options.owner.html_url || ''
+    };
 
     this.bower_name = options.bower_name || '';
     this.bower_keywords = options.bower_keywords || [];
@@ -59,10 +61,12 @@ Repository.prototype.toJSON = function() {
         has_wiki: this.has_wiki,
         has_pages: this.has_pages,
 
-        owner_id: this.owner_id,
-        owner_login: this.owner_login,
-        owner_avatar_url: this.owner_avatar_url,
-        owner_html_url: this.owner_html_url,
+        owner: {
+            id: this.owner.id,
+            login: this.owner.login,
+            avatar_url: this.owner.avatar_url,
+            html_url: this.owner.html_url
+        },
 
         bower_name: this.bower_name,
         bower_keywords: this.bower_keywords

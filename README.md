@@ -47,6 +47,17 @@ curl -X GET fetch.customelements.io/packages/bower
 ]
 ```
 
+### PUT `/repos/bower`
+
+1. Fetches `/packages/bower`.
+2. Requests GitHub API for each repo.
+3. Filters unnecessary keys from each JSON entry.
+4. Saves result data into Redis.
+
+```sh
+curl -X PUT fetch.customelements.io/repos/bower
+```
+
 ## Install
 
 ```sh

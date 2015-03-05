@@ -33,10 +33,10 @@ describe('Repository', function() {
             assert.property(repo, 'has_wiki');
             assert.property(repo, 'has_pages');
 
-            assert.property(repo, 'owner_id');
-            assert.property(repo, 'owner_login');
-            assert.property(repo, 'owner_avatar_url');
-            assert.property(repo, 'owner_html_url');
+            assert.property(repo.owner, 'id');
+            assert.property(repo.owner, 'login');
+            assert.property(repo.owner, 'avatar_url');
+            assert.property(repo.owner, 'html_url');
 
             assert.property(repo, 'bower_name');
             assert.property(repo, 'bower_keywords');
@@ -73,10 +73,10 @@ describe('Repository', function() {
             assert.equal(json.has_wiki, options.has_wiki);
             assert.equal(json.has_pages, options.has_pages);
 
-            assert.equal(json.owner_id, options.owner.id);
-            assert.equal(json.owner_login, options.owner.login);
-            assert.equal(json.owner_avatar_url, options.owner.avatar_url);
-            assert.equal(json.owner_html_url, options.owner.html_url);
+            assert.equal(json.owner.id, options.owner.id);
+            assert.equal(json.owner.login, options.owner.login);
+            assert.equal(json.owner.avatar_url, options.owner.avatar_url);
+            assert.equal(json.owner.html_url, options.owner.html_url);
 
             assert.equal(json.bower_name, options.bower_name);
             assert.equal(json.bower_keywords, options.bower_keywords);
