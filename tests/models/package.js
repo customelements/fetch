@@ -1,5 +1,5 @@
 var assert = require('chai').assert;
-var Package = require('./../../models/package');
+var Package = require('../../models/package');
 
 describe('Package', function() {
     describe('constructor', function() {

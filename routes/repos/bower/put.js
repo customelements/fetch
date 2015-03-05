@@ -1,6 +1,6 @@
-var fetch = require('../../utils/fetch');
-var github = require('../../configs/github');
-var Repository = require('../../models/repository');
+var boom = require('boom');
+var fetch = require('../../../utils/fetch');
+var github = require('../../../configs/github');
 
 module.exports = function(request, reply) {
     fetch('http://localhost:3000/packages/bower')
