@@ -1,6 +1,47 @@
 # Fetch
 
-TODO: Project under construction
+> **Attention:** This is a work in progress.
+
+Microservices that fetches packages from [npm](https://www.npmjs.org/) & [Bower](http://bower.io/) which contains the `web-components` keyword.
+
+## APIs
+
+### PUT `/packages/bower`
+
+1. Fetches all packages from Bower that contains the `web-components` keywords.
+2. Filters unnecessary keys from each JSON entry.
+3. Saves result data into Redis.
+
+```sh
+curl -X PUT fetch.customelements.io/packages/bower
+```
+
+### GET `/packages/bower`
+
+1. Gets data from Redis based on the operation above.
+
+```sh
+curl -X GET fetch.customelements.io/packages/bower
+```
+
+```js
+[
+    {
+        "name": "codepen-embed",
+        "keywords": [
+            "codepen",
+            "polymer",
+            "web-components",
+            "embed"
+        ],
+        "github_repo": {
+            "owner": "Jupiterrr",
+            "name": "codepen-embed-component"
+        }
+    },
+    {...}
+]
+```
 
 ## Install
 
