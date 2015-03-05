@@ -14,6 +14,7 @@ $ npm install
 ```sh
 $ export GITHUB_CLIENT_ID
 $ export GITHUB_CLIENT_SECRET
+$ export REDISTOGO_URL
 ```
 
 ## Usage
