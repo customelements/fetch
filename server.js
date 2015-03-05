@@ -12,6 +12,14 @@ server.connection({
 // -- Routes -------------------------------------------------------------------
 
 server.route({
+    method: 'GET',
+    path: '/packages/bower',
+    config: {
+        handler: require('./routes/packages/bower/get.js')
+    }
+});
+
+server.route({
     method: 'PUT',
     path: '/packages/bower',
     config: {
