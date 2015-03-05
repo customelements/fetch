@@ -20,6 +20,8 @@ Microservices that fetches packages from [npm](https://www.npmjs.org/) & [Bower]
 curl -X PUT fetch.customelements.io/packages/bower
 ```
 
+---
+
 ### GET `/packages/bower`
 
 1. Gets data from Redis based on the operation above.
@@ -59,6 +61,8 @@ curl -X GET fetch.customelements.io/packages/bower
 ```sh
 curl -X PUT fetch.customelements.io/repos/bower
 ```
+
+---
 
 ### GET `/repos/bower`
 
@@ -104,27 +108,6 @@ curl -X GET fetch.customelements.io/repos/bower
     },
     {...}
 ]
-```
-
-## Install
-
-```sh
-$ git clone git@github.com:customelements/fetch.git
-$ npm install
-```
-
-## Setup
-
-```sh
-$ export GITHUB_CLIENT_ID
-$ export GITHUB_CLIENT_SECRET
-$ export REDISTOGO_URL
-```
-
-## Usage
-
-```sh
-$ node server
 ```
 
 ## License
