@@ -1,4 +1,3 @@
-var env = require('./env');
 var GitHub = require('github');
 
 module.exports = function() {
@@ -8,8 +7,8 @@ module.exports = function() {
 
     github.authenticate({
         type: 'oauth',
-        key: env.GITHUB_CLIENT_ID,
-        secret: env.GITHUB_CLIENT_SECRET
+        key: process.env.GITHUB_CLIENT_ID,
+        secret: process.env.GITHUB_CLIENT_SECRET
     });
 
     return github;
