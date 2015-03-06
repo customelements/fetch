@@ -13,6 +13,8 @@ describe('Package', function() {
             var pkg = new Package();
             assert.property(pkg.bower, 'name');
             assert.property(pkg.bower, 'keywords');
+            assert.property(pkg.npm, 'name');
+            assert.property(pkg.npm, 'keywords');
             assert.property(pkg.github, 'url');
         });
     });
@@ -57,6 +59,10 @@ describe('Package', function() {
                 name: 'voice-elements',
                 keywords: ['polymer']
             },
+            npm: {
+                name: 'voice-elements',
+                keywords: ['polymer']
+            },
             github: {
                 url: 'https://github.com/zenorocha/voice-elements'
             }
@@ -68,6 +74,8 @@ describe('Package', function() {
 
             assert.equal(json.bower.name, options.bower.name);
             assert.equal(json.bower.keywords, options.bower.keywords);
+            assert.equal(json.npm.name, options.npm.name);
+            assert.equal(json.npm.keywords, options.npm.keywords);
             assert.equal(json.github.owner, 'zenorocha');
             assert.equal(json.github.name, 'voice-elements');
         });

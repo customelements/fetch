@@ -42,6 +42,10 @@ curl -X GET fetch.customelements.io/packages/bower
                 "embed"
             ]
         },
+        "npm": {
+            "name": "",
+            "keywords": []
+        },
         "github": {
             "owner": "Jupiterrr",
             "name": "codepen-embed-component"
@@ -80,6 +84,10 @@ curl -X GET fetch.customelements.io/repos/bower
         "name": "voice-elements",
         "keywords": ["Polymer"]
     },
+    "npm": {
+        "name": "",
+        "keywords": []
+    },
     "github": {
         "id": 18821483,
         "name": "voice-elements",
@@ -108,6 +116,53 @@ curl -X GET fetch.customelements.io/repos/bower
             "login": "zenorocha",
             "avatar_url": "https://avatars.githubusercontent.com/u/398893?v=3",
             "html_url": "https://github.com/zenorocha"
+        }
+    },
+    {...}
+]
+```
+
+---
+
+### PUT `/packages/npm`
+
+1. Fetches all packages from npm that contains the `web-components` keywords.
+2. Fetches each package metadata.
+3. Filters unnecessary keys from each JSON entry.
+4. Saves result data into Redis.
+
+```sh
+curl -X PUT fetch.customelements.io/packages/npm
+```
+
+---
+
+### GET `/packages/npm`
+
+1. Gets data from Redis based on the operation above.
+
+```bash
+curl -X GET fetch.customelements.io/packages/npm
+```
+
+```json
+[
+    {
+        "bower": {
+            "name": "",
+            "keywords": []
+        },
+        "npm": {
+            "name": "declarative-custom-element",
+            "keywords": [
+                "web-component",
+                "web-components",
+                "custom-element"
+            ]
+        },
+        "github": {
+            "owner": "kentaromiura",
+            "name": "custom-element"
         }
     },
     {...}

@@ -3,11 +3,17 @@ var githubUrl = require('github-url-to-object');
 function Package(options) {
     options = options || {};
     options.bower = options.bower || {};
+    options.npm = options.npm || {};
     options.github = options.github || {};
 
     this.bower = {
         name: options.bower.name || '',
         keywords: options.bower.keywords || []
+    };
+
+    this.npm = {
+        name: options.npm.name || '',
+        keywords: options.npm.keywords || []
     };
 
     this.github = {
@@ -28,6 +34,10 @@ Package.prototype.toJSON = function() {
         bower: {
             name: this.bower.name,
             keywords: this.bower.keywords,
+        },
+        npm: {
+            name: this.npm.name,
+            keywords: this.npm.keywords,
         },
         github: {
             owner: this.githubOwner(),

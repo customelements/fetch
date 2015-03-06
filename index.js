@@ -43,6 +43,22 @@ server.route({
     }
 });
 
+server.route({
+    method: 'GET',
+    path: '/packages/npm',
+    config: {
+        handler: require('./routes/packages/npm/get.js')
+    }
+});
+
+server.route({
+    method: 'PUT',
+    path: '/packages/npm',
+    config: {
+        handler: require('./routes/packages/npm/put.js')
+    }
+});
+
 // -- Start --------------------------------------------------------------------
 
 server.register({
