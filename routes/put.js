@@ -7,7 +7,7 @@ var Repository = require('../../../models/repository');
 module.exports = function(request, reply) {
     request.log([request.route.method], 'Request made to: ' + request.route.path);
 
-    fetch('http://fetch.customelements.io/packages/bower')
+    fetch('http://fetch.customelements.io/packages')
         .then(function(result) {
             request.log(['#fetch'], 'Done with promise');
             return fetchAll(result, request);
@@ -18,7 +18,7 @@ module.exports = function(request, reply) {
         })
         .then(function(result) {
             request.log(['#reduce'], 'Done with promise');
-            return db.set('repos:bower', result);
+            return db.set('all', result);
         })
         .then(function(result) {
             request.log(['#db.set'], 'Done with promise');
@@ -67,6 +67,10 @@ function reduce(data, request) {
                 bower: {
                     name: elem[0].bower.name,
                     keywords: elem[0].bower.keywords
+                },
+                npm: {
+                    name: elem[0].npm.name,
+                    keywords: elem[0].npm.keywords
                 },
                 github: {
                     id: elem[1].id,

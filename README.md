@@ -10,72 +10,25 @@ Microservices that fetches packages from [npm](https://www.npmjs.org/) & [Bower]
 
 ## APIs
 
-### PUT `/packages/bower`
+### PUT `/`
 
-1. Fetches all packages from Bower that contains the `web-components` keywords.
-2. Filters unnecessary keys from each JSON entry.
-3. Saves result data into Redis.
-
-```sh
-curl -X PUT fetch.customelements.io/packages/bower
-```
-
----
-
-### GET `/packages/bower`
-
-1. Gets data from Redis based on the operation above.
-
-```bash
-curl -X GET fetch.customelements.io/packages/bower
-```
-
-```json
-[
-    {
-        "bower": {
-            "name": "codepen-embed",
-            "keywords": [
-                "codepen",
-                "polymer",
-                "web-components",
-                "embed"
-            ]
-        },
-        "npm": {
-            "name": "",
-            "keywords": []
-        },
-        "github": {
-            "owner": "Jupiterrr",
-            "name": "codepen-embed-component"
-        }
-    },
-    {...}
-]
-```
-
----
-
-### PUT `/repos/bower`
-
-1. Fetches `/packages/bower`.
+1. Fetches `/packages`.
 2. Requests GitHub API for each repo.
 3. Filters unnecessary keys from each JSON entry.
 4. Saves result data into Redis.
 
 ```bash
-curl -X PUT fetch.customelements.io/repos/bower
+curl -X PUT fetch.customelements.io
 ```
 
 ---
 
-### GET `/repos/bower`
+### GET `/`
 
 1. Gets data from Redis based on the operation above.
 
 ```bash
-curl -X GET fetch.customelements.io/repos/bower
+curl -X GET fetch.customelements.io
 ```
 
 ```json
@@ -116,6 +69,100 @@ curl -X GET fetch.customelements.io/repos/bower
             "login": "zenorocha",
             "avatar_url": "https://avatars.githubusercontent.com/u/398893?v=3",
             "html_url": "https://github.com/zenorocha"
+        }
+    },
+    {...}
+]
+```
+---
+
+### PUT `/packages`
+
+1. Fetches `/packages/bower`.
+2. Fetches `/packages/npm`.
+2. Merges two objects.
+3. Saves result data into Redis.
+
+```sh
+curl -X PUT fetch.customelements.io/packages
+```
+
+---
+
+### GET `/packages`
+
+1. Gets data from Redis based on the operation above.
+
+```bash
+curl -X GET fetch.customelements.io/packages
+```
+
+```json
+[
+    {
+        "bower": {
+            "name": "codepen-embed",
+            "keywords": [
+                "codepen",
+                "polymer",
+                "web-components",
+                "embed"
+            ]
+        },
+        "npm": {
+            "name": "",
+            "keywords": []
+        },
+        "github": {
+            "owner": "Jupiterrr",
+            "name": "codepen-embed-component"
+        }
+    },
+    {...}
+]
+```
+
+---
+
+### PUT `/packages/bower`
+
+1. Fetches all packages from Bower that contains the `web-components` keywords.
+2. Filters unnecessary keys from each JSON entry.
+3. Saves result data into Redis.
+
+```sh
+curl -X PUT fetch.customelements.io/packages/bower
+```
+
+---
+
+### GET `/packages/bower`
+
+1. Gets data from Redis based on the operation above.
+
+```bash
+curl -X GET fetch.customelements.io/packages/bower
+```
+
+```json
+[
+    {
+        "bower": {
+            "name": "codepen-embed",
+            "keywords": [
+                "codepen",
+                "polymer",
+                "web-components",
+                "embed"
+            ]
+        },
+        "npm": {
+            "name": "",
+            "keywords": []
+        },
+        "github": {
+            "owner": "Jupiterrr",
+            "name": "codepen-embed-component"
         }
     },
     {...}
