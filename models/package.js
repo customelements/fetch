@@ -2,25 +2,34 @@ var githubUrl = require('github-url-to-object');
 
 function Package(options) {
     options = options || {};
+    options.bower = options.bower || {};
+    options.github = options.github || {};
 
-    this.name = options.name || '';
-    this.keywords = options.keywords || [];
-    this.github_url = githubUrl(options.github_url) || '';
+    this.bower = {
+        name: options.bower.name || '',
+        keywords: options.bower.keywords || []
+    };
+
+    this.github = {
+        url: githubUrl(options.github.url) || ''
+    };
 }
 
 Package.prototype.githubOwner = function() {
-    return this.github_url.user || '';
+    return this.github.url.user || '';
 };
 
 Package.prototype.githubRepo = function() {
-    return this.github_url.repo || '';
+    return this.github.url.repo || '';
 };
 
 Package.prototype.toJSON = function() {
     return {
-        name: this.name,
-        keywords: this.keywords,
-        github_repo: {
+        bower: {
+            name: this.bower.name,
+            keywords: this.bower.keywords,
+        },
+        github: {
             owner: this.githubOwner(),
             name: this.githubRepo()
         }

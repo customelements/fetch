@@ -40,15 +40,15 @@ function fetchAll(packages, request) {
 }
 
 function fetchRepo(pkg, request) {
-    request.log(['#fetchRepo'], 'Request GitHub API to: ' + pkg.github_repo.owner + '/' + pkg.github_repo.name);
+    request.log(['#fetchRepo'], 'Request GitHub API to: ' + pkg.github.owner + '/' + pkg.github.name);
 
     return new Promise(function(resolve, reject) {
         github().repos.get({
-            user: pkg.github_repo.owner,
-            repo: pkg.github_repo.name
+            user: pkg.github.owner,
+            repo: pkg.github.name
         }, function(error, repo) {
             if (error) {
-                reject(boom.create(parseInt(error.code, 10), 'Error when requesting repo: ' + pkg.github_owner + '/' + pkg.github_repo));
+                reject(boom.create(parseInt(error.code, 10), 'Error when requesting repo: ' + pkg.github.owner + '/' + pkg.github.name));
             }
 
             resolve([pkg, repo]);
@@ -94,8 +94,8 @@ function reduce(data, request) {
                     html_url: elem[1].owner.html_url
                 },
 
-                bower_name: elem[0].name,
-                bower_keywords: elem[0].keywords,
+                bower_name: elem[0].bower.name,
+                bower_keywords: elem[0].bower.keywords,
             }).toJSON()
         );
     });

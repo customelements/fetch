@@ -29,9 +29,13 @@ function reduce(data, request) {
 
         reducedData.push(
             new Package({
-                name: elem.name,
-                keywords: elem.keywords,
-                github_url: elem.website
+                bower: {
+                    name: elem.name,
+                    keywords: elem.keywords
+                },
+                github: {
+                    url: elem.website
+                }
             }).toJSON()
         );
     });

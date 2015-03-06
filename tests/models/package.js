@@ -11,30 +11,39 @@ describe('Package', function() {
     describe('properties', function() {
         it('expects object properties to exist', function() {
             var pkg = new Package();
-            assert.property(pkg, 'name');
-            assert.property(pkg, 'keywords');
-            assert.property(pkg, 'github_url');
+            assert.property(pkg.bower, 'name');
+            assert.property(pkg.bower, 'keywords');
+            assert.property(pkg.github, 'url');
         });
     });
 
     describe('#githubOwner', function() {
         var options = {
-            name: 'voice-elements',
-            keywords: ['polymer'],
-            github_url: 'https://github.com/zenorocha/voice-elements'
+            bower: {
+                name: 'voice-elements',
+                keywords: ['polymer']
+            },
+            github: {
+                url: 'https://github.com/zenorocha/voice-elements'
+            }
         };
 
         it('returns github owner', function() {
             var pkg = new Package(options);
+            console.log(pkg);
             assert.equal(pkg.githubOwner(), 'zenorocha');
         });
     });
 
     describe('#githubRepo', function() {
         var options = {
-            name: 'voice-elements',
-            keywords: ['polymer'],
-            github_url: 'https://github.com/zenorocha/voice-elements'
+            bower: {
+                name: 'voice-elements',
+                keywords: ['polymer']
+            },
+            github: {
+                url: 'https://github.com/zenorocha/voice-elements'
+            }
         };
 
         it('returns github repo', function() {
@@ -45,19 +54,23 @@ describe('Package', function() {
 
     describe('#toJSON', function() {
         var options = {
-            name: 'voice-elements',
-            keywords: ['polymer'],
-            github_url: 'https://github.com/zenorocha/voice-elements'
+            bower: {
+                name: 'voice-elements',
+                keywords: ['polymer']
+            },
+            github: {
+                url: 'https://github.com/zenorocha/voice-elements'
+            }
         };
 
         it('returns object as json', function() {
             var pkg = new Package(options);
             var json = pkg.toJSON();
 
-            assert.equal(json.name, options.name);
-            assert.equal(json.keywords, options.keywords);
-            assert.equal(json.github_repo.owner, 'zenorocha');
-            assert.equal(json.github_repo.name, 'voice-elements');
+            assert.equal(json.bower.name, options.bower.name);
+            assert.equal(json.bower.keywords, options.bower.keywords);
+            assert.equal(json.github.owner, 'zenorocha');
+            assert.equal(json.github.name, 'voice-elements');
         });
     });
 });

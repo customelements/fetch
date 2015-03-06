@@ -26,21 +26,23 @@ curl -X PUT fetch.customelements.io/packages/bower
 
 1. Gets data from Redis based on the operation above.
 
-```sh
+```bash
 curl -X GET fetch.customelements.io/packages/bower
 ```
 
-```js
+```json
 [
     {
-        "name": "codepen-embed",
-        "keywords": [
-            "codepen",
-            "polymer",
-            "web-components",
-            "embed"
-        ],
-        "github_repo": {
+        "bower": {
+            "name": "codepen-embed",
+            "keywords": [
+                "codepen",
+                "polymer",
+                "web-components",
+                "embed"
+            ]
+        },
+        "github": {
             "owner": "Jupiterrr",
             "name": "codepen-embed-component"
         }
@@ -58,7 +60,7 @@ curl -X GET fetch.customelements.io/packages/bower
 3. Filters unnecessary keys from each JSON entry.
 4. Saves result data into Redis.
 
-```sh
+```bash
 curl -X PUT fetch.customelements.io/repos/bower
 ```
 
@@ -68,11 +70,11 @@ curl -X PUT fetch.customelements.io/repos/bower
 
 1. Gets data from Redis based on the operation above.
 
-```sh
+```bash
 curl -X GET fetch.customelements.io/repos/bower
 ```
 
-```js
+```json
 [
     {
         "id": 27491780,
