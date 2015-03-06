@@ -1,75 +1,82 @@
 function Repository(options) {
     options = options || {};
-    options.owner = options.owner || {};
+    options.bower = options.bower || {};
+    options.github = options.github || {};
+    options.github.owner = options.github.owner || {};
 
-    this.id = options.id || 0;
-    this.name = options.name || '';
-    this.full_name = options.full_name || '';
-    this.description = options.description || '';
-    this.html_url = options.html_url || '';
-    this.homepage = options.homepage || '';
-    this.size = options.size || 0;
-
-    this.created_at = options.created_at || '';
-    this.updated_at = options.updated_at || '';
-    this.pushed_at = options.pushed_at || '';
-
-    this.subscribers_count = options.subscribers_count || 0;
-    this.open_issues_count = options.open_issues_count || 0;
-    this.stargazers_count = options.stargazers_count || 0;
-    this.watchers_count = options.watchers_count || 0;
-    this.forks_count = options.forks_count || 0;
-
-    this.has_issues = options.has_issues || false;
-    this.has_downloads = options.has_downloads || false;
-    this.has_wiki = options.has_wiki || false;
-    this.has_pages = options.has_pages || false;
-
-    this.owner = {
-        id: options.owner.id || 0,
-        login: options.owner.login || '',
-        avatar_url: options.owner.avatar_url || '',
-        html_url: options.owner.html_url || ''
+    this.bower = {
+        name: options.bower.name || '',
+        keywords: options.bower.keywords || []
     };
 
-    this.bower_name = options.bower_name || '';
-    this.bower_keywords = options.bower_keywords || [];
+    this.github = {
+        id: options.github.id || 0,
+        name: options.github.name || '',
+        full_name: options.github.full_name || '',
+        description: options.github.description || '',
+        html_url: options.github.html_url || '',
+        homepage: options.github.homepage || '',
+        size: options.github.size || 0,
+
+        created_at: options.github.created_at || '',
+        updated_at: options.github.updated_at || '',
+        pushed_at: options.github.pushed_at || '',
+
+        subscribers_count: options.github.subscribers_count || 0,
+        open_issues_count: options.github.open_issues_count || 0,
+        stargazers_count: options.github.stargazers_count || 0,
+        forks_count: options.github.forks_count || 0,
+
+        has_issues: options.github.has_issues || false,
+        has_downloads: options.github.has_downloads || false,
+        has_wiki: options.github.has_wiki || false,
+        has_pages: options.github.has_pages || false,
+
+        owner: {
+            id: options.github.owner.id || 0,
+            login: options.github.owner.login || '',
+            avatar_url: options.github.owner.avatar_url || '',
+            html_url: options.github.owner.html_url || ''
+        }
+    };
 }
 
 Repository.prototype.toJSON = function() {
     return {
-        id: this.id,
-        name: this.name,
-        full_name: this.full_name,
-        description: this.description,
-        html_url: this.html_url,
-        homepage: this.homepage,
-        size: this.size,
-
-        created_at: this.created_at,
-        updated_at: this.updated_at,
-        pushed_at: this.pushed_at,
-
-        subscribers_count: this.subscribers_count,
-        open_issues_count: this.open_issues_count,
-        stargazers_count: this.stargazers_count,
-        watchers_count: this.watchers_count,
-        forks_count: this.forks_count,
-
-        has_issues: this.has_issues,
-        has_downloads: this.has_downloads,
-        has_wiki: this.has_wiki,
-        has_pages: this.has_pages,
-
-        owner: {
-            id: this.owner.id,
-            login: this.owner.login,
-            avatar_url: this.owner.avatar_url,
-            html_url: this.owner.html_url
+        bower: {
+            name: this.bower.name,
+            keywords: this.bower.keywords
         },
+        github: {
+            id: this.github.id,
+            name: this.github.name,
+            full_name: this.github.full_name,
+            description: this.github.description,
+            html_url: this.github.html_url,
+            homepage: this.github.homepage,
+            size: this.github.size,
 
-        bower_name: this.bower_name,
-        bower_keywords: this.bower_keywords
+            created_at: this.github.created_at,
+            updated_at: this.github.updated_at,
+            pushed_at: this.github.pushed_at,
+
+            subscribers_count: this.github.subscribers_count,
+            open_issues_count: this.github.open_issues_count,
+            stargazers_count: this.github.stargazers_count,
+            forks_count: this.github.forks_count,
+
+            has_issues: this.github.has_issues,
+            has_downloads: this.github.has_downloads,
+            has_wiki: this.github.has_wiki,
+            has_pages: this.github.has_pages,
+
+            owner: {
+                id: this.github.owner.id,
+                login: this.github.owner.login,
+                avatar_url: this.github.owner.avatar_url,
+                html_url: this.github.owner.html_url
+            }
+        }
     };
 };
 

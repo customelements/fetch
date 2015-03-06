@@ -76,37 +76,39 @@ curl -X GET fetch.customelements.io/repos/bower
 
 ```json
 [
-    {
-        "id": 27491780,
-        "name": "aaa-form-controls",
-        "full_name": "Will-in-BC/aaa-form-controls",
-        "description": "A polymer element that provides a forms control for CRUD (Create, Retrieve, Update, Delete)",
-        "html_url": "https://github.com/Will-in-BC/aaa-form-controls",
-        "homepage": "",
-        "size": 604,
-        "created_at": "2014-12-03T14:47:50Z",
-        "updated_at": "2014-12-03T14:47:50Z",
-        "pushed_at": "2015-01-01T20:44:13Z",
-        "subscribers_count": 1,
-        "open_issues_count": 0,
-        "stargazers_count": 0,
-        "watchers_count": 0,
-        "forks_count": 0,
+    "bower": {
+        "name": "voice-elements",
+        "keywords": ["Polymer"]
+    },
+    "github": {
+        "id": 18821483,
+        "name": "voice-elements",
+        "full_name": "zenorocha/voice-elements",
+        "description": "Web Component wrapper to the Web Speech API, that allows you to do voice recognition and speech synthesis using Polymer",
+        "html_url": "https://github.com/zenorocha/voice-elements",
+        "homepage": "http://zenorocha.github.io/voice-elements",
+        "size": 1472,
+
+        "created_at": "2014-04-16T00:48:46Z",
+        "updated_at": "2015-03-02T02:23:32Z",
+        "pushed_at": "2014-11-26T18:57:10Z",
+
+        "subscribers_count": 47,
+        "open_issues_count": 9,
+        "stargazers_count": 972,
+        "forks_count": 154,
+
         "has_issues": true,
         "has_downloads": true,
         "has_wiki": true,
         "has_pages": true,
+
         "owner": {
-            "id": 9541036,
-            "login": "Will-in-BC",
-            "avatar_url": "https://avatars.githubusercontent.com/u/9541036?v=3",
-            "html_url": "https://github.com/Will-in-BC"
-        },
-        "bower_name": "aaa-form-controls",
-        "bower_keywords": [
-            "Polymer",
-            "web-components"
-        ]
+            "id": 398893,
+            "login": "zenorocha",
+            "avatar_url": "https://avatars.githubusercontent.com/u/398893?v=3",
+            "html_url": "https://github.com/zenorocha"
+        }
     },
     {...}
 ]

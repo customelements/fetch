@@ -30,7 +30,6 @@ describe('Package', function() {
 
         it('returns github owner', function() {
             var pkg = new Package(options);
-            console.log(pkg);
             assert.equal(pkg.githubOwner(), 'zenorocha');
         });
     });
