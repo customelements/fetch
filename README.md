@@ -31,7 +31,7 @@ curl -X PUT fetch.customelements.io
 curl -X GET fetch.customelements.io
 ```
 
-```json
+```js
 [
     "bower": {
         "name": "voice-elements",
@@ -99,7 +99,7 @@ curl -X PUT fetch.customelements.io/packages
 curl -X GET fetch.customelements.io/packages
 ```
 
-```json
+```js
 [
     {
         "bower": {
@@ -146,7 +146,7 @@ curl -X PUT fetch.customelements.io/packages/bower
 curl -X GET fetch.customelements.io/packages/bower
 ```
 
-```json
+```js
 [
     {
         "bower": {
@@ -194,7 +194,7 @@ curl -X PUT fetch.customelements.io/packages/npm
 curl -X GET fetch.customelements.io/packages/npm
 ```
 
-```json
+```js
 [
     {
         "bower": {
