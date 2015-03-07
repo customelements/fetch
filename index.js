@@ -13,58 +13,7 @@ server.connection({
 
 // -- Routes -------------------------------------------------------------------
 
-server.route([
-    {
-        method: 'GET',
-        path: '/',
-        config: {
-            handler: require('./routes/get.js')
-        }
-    }, {
-        method: 'PUT',
-        path: '/',
-        config: {
-            handler: require('./routes/put.js')
-        }
-    },
-    {
-        method: 'GET',
-        path: '/packages',
-        config: {
-            handler: require('./routes/packages/get.js')
-        }
-    }, {
-        method: 'PUT',
-        path: '/packages',
-        config: {
-            handler: require('./routes/packages/put.js')
-        }
-    }, {
-        method: 'GET',
-        path: '/packages/bower',
-        config: {
-            handler: require('./routes/packages/bower/get.js')
-        }
-    }, {
-        method: 'PUT',
-        path: '/packages/bower',
-        config: {
-            handler: require('./routes/packages/bower/put.js')
-        }
-    }, {
-        method: 'GET',
-        path: '/packages/npm',
-        config: {
-            handler: require('./routes/packages/npm/get.js')
-        }
-    }, {
-        method: 'PUT',
-        path: '/packages/npm',
-        config: {
-            handler: require('./routes/packages/npm/put.js')
-        }
-    }
-]);
+server.route(require('./routes'));
 
 // -- Start --------------------------------------------------------------------
 
