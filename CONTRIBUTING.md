@@ -18,6 +18,10 @@ $ npm install
 ```sh
 $ export GITHUB_CLIENT_ID
 $ export GITHUB_CLIENT_SECRET
+$ export NEW_RELIC_APP_NAME
+$ export NEW_RELIC_LICENSE_KEY
+$ export NEW_RELIC_LOG
+$ export PAPERTRAIL_API_TOKEN
 $ export REDISTOGO_URL
 ```
 
