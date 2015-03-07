@@ -16,6 +16,19 @@ server.connection({
 server.route([
     {
         method: 'GET',
+        path: '/',
+        config: {
+            handler: require('./routes/get.js')
+        }
+    }, {
+        method: 'PUT',
+        path: '/',
+        config: {
+            handler: require('./routes/put.js')
+        }
+    },
+    {
+        method: 'GET',
         path: '/packages',
         config: {
             handler: require('./routes/packages/get.js')

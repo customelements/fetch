@@ -1,8 +1,8 @@
 var boom = require('boom');
-var db = require('../../../utils/db');
-var fetch = require('../../../utils/fetch');
-var github = require('../../../configs/github');
-var Repository = require('../../../models/repository');
+var db = require('../utils/db');
+var fetch = require('../utils/fetch');
+var github = require('../configs/github');
+var Repository = require('../models/repository');
 
 module.exports = function(request, reply) {
     request.log([request.route.method], 'Request made to: ' + request.route.path);

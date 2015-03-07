@@ -3,6 +3,10 @@
     "name": "voice-elements",
     "keywords": ["Polymer"]
   },
+  "npm": {
+    "name": "",
+    "keywords": []
+  },
   "github": {
     "id": 18821483,
     "name": "voice-elements",

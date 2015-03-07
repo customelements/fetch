@@ -1,12 +1,18 @@
 function Repository(options) {
     options = options || {};
     options.bower = options.bower || {};
+    options.npm = options.npm || {};
     options.github = options.github || {};
     options.github.owner = options.github.owner || {};
 
     this.bower = {
         name: options.bower.name || '',
         keywords: options.bower.keywords || []
+    };
+
+    this.npm = {
+        name: options.npm.name || '',
+        keywords: options.npm.keywords || []
     };
 
     this.github = {
@@ -46,6 +52,10 @@ Repository.prototype.toJSON = function() {
         bower: {
             name: this.bower.name,
             keywords: this.bower.keywords
+        },
+        npm: {
+            name: this.npm.name,
+            keywords: this.npm.keywords
         },
         github: {
             id: this.github.id,

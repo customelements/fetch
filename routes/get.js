@@ -1,5 +1,5 @@
 var boom = require('boom');
-var db = require('../../../utils/db');
+var db = require('../utils/db');
 
 module.exports = function(request, reply) {
     request.log([request.route.method], 'Request made to: ' + request.route.path);

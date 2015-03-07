@@ -14,6 +14,9 @@ describe('Repository', function() {
             assert.property(repo.bower, 'name');
             assert.property(repo.bower, 'keywords');
 
+            assert.property(repo.npm, 'name');
+            assert.property(repo.npm, 'keywords');
+
             assert.property(repo.github, 'name');
             assert.property(repo.github, 'full_name');
             assert.property(repo.github, 'description');
@@ -51,6 +54,9 @@ describe('Repository', function() {
 
             assert.equal(json.bower.name, options.bower.name);
             assert.equal(json.bower.keywords, options.bower.keywords);
+
+            assert.equal(json.npm.name, options.npm.name);
+            assert.equal(json.npm.keywords, options.npm.keywords);
 
             assert.equal(json.github.id, options.github.id);
             assert.equal(json.github.name, options.github.name);
