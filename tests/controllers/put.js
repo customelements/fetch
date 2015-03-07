@@ -1,5 +1,5 @@
 var assert = require('chai').assert;
-var Controller = require('../../handlers/packages/put');
+var Controller = require('../../controllers/packages/put');
 
 describe('Controller', function() {
     describe('#mergeSameRepo', function() {
