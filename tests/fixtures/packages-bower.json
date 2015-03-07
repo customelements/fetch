@@ -1,0 +1,67 @@
+[
+  {
+    "bower": {
+      "name": "akyral-waypoint",
+      "keywords": [
+        "akyral",
+        "scrolling",
+        "scroll",
+        "waypoint",
+        "waypoints",
+        "polymer",
+        "responsive",
+        "web-components"
+      ]
+    },
+    "npm": {
+      "name": "",
+      "keywords": [ ]
+    },
+    "github": {
+      "owner": "filaraujo",
+      "name": "akyral-waypoint"
+    }
+  },
+  {
+    "bower": {
+      "name": "amazeui",
+      "keywords": [
+        "css",
+        "js",
+        "less",
+        "mobile-first",
+        "responsive",
+        "front-end",
+        "framework",
+        "web",
+        "web-components"
+      ]
+    },
+    "npm": {
+      "name": "",
+      "keywords": [ ]
+    },
+    "github": {
+      "owner": "allmobilize",
+      "name": "amazeui"
+    }
+  },
+  {
+    "bower": {
+      "name": "am-step-progress",
+      "keywords": [
+        "seed",
+        "polymer",
+        "web-components"
+      ]
+    },
+    "npm": {
+      "name": "",
+      "keywords": [ ]
+    },
+    "github": {
+      "owner": "MasterAM",
+      "name": "am-step-progress"
+    }
+  }
+]

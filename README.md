@@ -74,14 +74,16 @@ curl -X GET fetch.customelements.io
     {...}
 ]
 ```
+
 ---
 
 ### PUT `/packages`
 
 1. Fetches `/packages/bower`.
 2. Fetches `/packages/npm`.
-2. Merges two objects.
-3. Saves result data into Redis.
+3. Aggregates packages that contains the same GitHub repo.
+4. Merges the two arrays.
+5. Saves result data into Redis.
 
 ```sh
 curl -X PUT fetch.customelements.io/packages
