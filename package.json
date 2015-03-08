@@ -2,7 +2,7 @@
   "private": true,
   "name": "fetch",
   "version": "0.1.0",
-  "description": "Fetch packages from Bower that contains the web-components keyword",
+  "description": "Microservices that fetches GitHub data from certain npm & bower packages",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

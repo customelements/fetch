@@ -4,9 +4,9 @@
 [![Dependencies Status](http://img.shields.io/david/customelements/fetch.svg?style=flat)](https://david-dm.org/customelements/fetch)
 [![DevDependencies Status](http://img.shields.io/david/dev/customelements/fetch.svg?style=flat)](https://david-dm.org/customelements/fetch#info=devDependencies)
 
-> **Attention:** This is a work in progress.
+> Microservices that fetches GitHub data from certain [npm](https://www.npmjs.org/) & [bower](http://bower.io/) packages.
 
-Microservices that fetches packages from [npm](https://www.npmjs.org/) & [Bower](http://bower.io/) which contains the `web-components` keyword. Built with [Node](http://nodejs.org/), [Hapi](http://hapijs.com/), and [Redis](http://redis.io/). Hosted on [Heroku](https://heroku.com/).
+Built with [Node](http://nodejs.org/), [Hapi](http://hapijs.com/), and [Redis](http://redis.io/). Hosted on [Heroku](https://heroku.com/). Monitored on [New Relic](https://newrelic.com/).
 
 ## APIs
 
