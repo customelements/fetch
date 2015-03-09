@@ -1,7 +1,7 @@
 var assert = require('chai').assert;
-var Controller = require('../../controllers/put');
+var Controller = require('../../../../controllers/packages/npm/put');
 
-describe('PUT /', function() {
+describe('PUT /packages/npm', function() {
     describe('Controller', function() {
         describe('constructor', function() {
             it('creates an instance of this object', function() {
@@ -16,21 +16,17 @@ describe('PUT /', function() {
                 assert.property(controller, 'reply');
             });
         });
-    });
 
-    describe('#init', function() {
-        // TODO: Write test case
-    });
+        describe('#init', function() {
+            // TODO: Write test case
+        });
 
-    describe('#fetchAll', function() {
-        // TODO: Write test case
-    });
+        describe('#fetchAll', function() {
+            // TODO: Write test case
+        });
 
-    describe('#fetchRepo', function() {
-        // TODO: Write test case
-    });
-
-    describe('#reduce', function() {
-        // TODO: Write test case
+        describe('#reduce', function() {
+            // TODO: Write test case
+        });
     });
 });
