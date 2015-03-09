@@ -11,7 +11,8 @@ module.exports = function(url) {
                 reject(boom.wrap(error));
             }
             else if (response.statusCode !== 200) {
-                reject(boom.create(response.statusCode, 'Error when requesting URL: ' + url));
+                var errorMsg = 'Error when requesting URL: ' + url;
+                reject(boom.create(response.statusCode, errorMsg));
             }
             else {
                 resolve(body);

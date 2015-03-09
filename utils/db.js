@@ -3,8 +3,8 @@ var db = require('../configs/db');
 
 exports.get = function(key) {
     return new Promise(function(resolve, reject) {
-        db.get(key, function(err, result) {
-            if (err) {
+        db.get(key, function(error, result) {
+            if (error) {
                 reject(boom.badData('Error when getting key ' + key + ' from Redis'));
             }
 

@@ -2,12 +2,14 @@ var assert = require('chai').assert;
 var Controller = require('../../controllers/packages/put');
 
 describe('Controller', function() {
+    var self = new Controller();
+
     describe('#mergeSameRepo', function() {
         it('should merge packages that contains the same repo', function() {
             var bowerPackages = require('../fixtures/packages-bower');
             var npmPackages = require('../fixtures/packages-npm');
 
-            var result = Controller.mergeSameRepo(bowerPackages, npmPackages);
+            var result = self.mergeSameRepo(bowerPackages, npmPackages);
             assert.deepEqual(result, require('../fixtures/packages-same-repo'));
         });
     });
@@ -17,14 +19,14 @@ describe('Controller', function() {
             var sameRepoPkgs = require('../fixtures/packages-same-repo');
             var npmPackages = require('../fixtures/packages-npm');
 
-            var result = Controller.mergeUniqueRepo(sameRepoPkgs, npmPackages);
+            var result = self.mergeUniqueRepo(sameRepoPkgs, npmPackages);
             assert.deepEqual(result, require('../fixtures/packages-unique-repo'));
         });
     });
 
     describe('#isSameRepo', function() {
         it('should consider the same repo', function() {
-            var result = Controller.isSameRepo({
+            var result = self.isSameRepo({
                 github: {
                     owner: 'customelements',
                     name: 'fetch'
