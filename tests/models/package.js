@@ -33,8 +33,8 @@ describe('Package', function() {
 
     describe('#toJSON', function() {
         var id = 'zenorocha/voice-elements';
-        var input = require('./package-input.json');
-        var output = require('./package-output.json');
+        var input = require('./fixtures/package-input.json');
+        var output = require('./fixtures/package-output.json');
 
         it('returns manipulated object as json', function() {
             var pkg = new Package(input);

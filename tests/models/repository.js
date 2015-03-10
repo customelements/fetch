@@ -46,44 +46,46 @@ describe('Repository', function() {
     });
 
     describe('#toJSON', function() {
-        var options = require('../fixtures/repository');
+        var id = 'zenorocha/voice-elements';
+        var input = require('./fixtures/repository-input.json');
+        var output = require('./fixtures/repository-output.json');
 
-        it('returns object as json', function() {
-            var repo = new Repository(options);
+        it('returns manipulated object as json', function() {
+            var repo = new Repository(input);
             var json = repo.toJSON();
 
-            assert.equal(json.bower.name, options.bower.name);
-            assert.equal(json.bower.keywords, options.bower.keywords);
+            assert.deepEqual(json[id].bower.name, output[id].bower.name);
+            assert.deepEqual(json[id].bower.keywords, output[id].bower.keywords);
 
-            assert.equal(json.npm.name, options.npm.name);
-            assert.equal(json.npm.keywords, options.npm.keywords);
+            assert.deepEqual(json[id].npm.name, output[id].npm.name);
+            assert.deepEqual(json[id].npm.keywords, output[id].npm.keywords);
 
-            assert.equal(json.github.id, options.github.id);
-            assert.equal(json.github.name, options.github.name);
-            assert.equal(json.github.full_name, options.github.full_name);
-            assert.equal(json.github.description, options.github.description);
-            assert.equal(json.github.html_url, options.github.html_url);
-            assert.equal(json.github.homepage, options.github.homepage);
-            assert.equal(json.github.size, options.github.size);
+            assert.deepEqual(json[id].github.id, output[id].github.id);
+            assert.deepEqual(json[id].github.name, output[id].github.name);
+            assert.deepEqual(json[id].github.full_name, output[id].github.full_name);
+            assert.deepEqual(json[id].github.description, output[id].github.description);
+            assert.deepEqual(json[id].github.html_url, output[id].github.html_url);
+            assert.deepEqual(json[id].github.homepage, output[id].github.homepage);
+            assert.deepEqual(json[id].github.size, output[id].github.size);
 
-            assert.equal(json.github.created_at, options.github.created_at);
-            assert.equal(json.github.updated_at, options.github.updated_at);
-            assert.equal(json.github.pushed_at, options.github.pushed_at);
+            assert.deepEqual(json[id].github.created_at, output[id].github.created_at);
+            assert.deepEqual(json[id].github.updated_at, output[id].github.updated_at);
+            assert.deepEqual(json[id].github.pushed_at, output[id].github.pushed_at);
 
-            assert.equal(json.github.subscribers_count, options.github.subscribers_count);
-            assert.equal(json.github.open_issues_count, options.github.open_issues_count);
-            assert.equal(json.github.stargazers_count, options.github.stargazers_count);
-            assert.equal(json.github.forks_count, options.github.forks_count);
+            assert.deepEqual(json[id].github.subscribers_count, output[id].github.subscribers_count);
+            assert.deepEqual(json[id].github.open_issues_count, output[id].github.open_issues_count);
+            assert.deepEqual(json[id].github.stargazers_count, output[id].github.stargazers_count);
+            assert.deepEqual(json[id].github.forks_count, output[id].github.forks_count);
 
-            assert.equal(json.github.has_issues, options.github.has_issues);
-            assert.equal(json.github.has_downloads, options.github.has_downloads);
-            assert.equal(json.github.has_wiki, options.github.has_wiki);
-            assert.equal(json.github.has_pages, options.github.has_pages);
+            assert.deepEqual(json[id].github.has_issues, output[id].github.has_issues);
+            assert.deepEqual(json[id].github.has_downloads, output[id].github.has_downloads);
+            assert.deepEqual(json[id].github.has_wiki, output[id].github.has_wiki);
+            assert.deepEqual(json[id].github.has_pages, output[id].github.has_pages);
 
-            assert.equal(json.github.owner.id, options.github.owner.id);
-            assert.equal(json.github.owner.login, options.github.owner.login);
-            assert.equal(json.github.owner.avatar_url, options.github.owner.avatar_url);
-            assert.equal(json.github.owner.html_url, options.github.owner.html_url);
+            assert.deepEqual(json[id].github.owner.id, output[id].github.owner.id);
+            assert.deepEqual(json[id].github.owner.login, output[id].github.owner.login);
+            assert.deepEqual(json[id].github.owner.avatar_url, output[id].github.owner.avatar_url);
+            assert.deepEqual(json[id].github.owner.html_url, output[id].github.owner.html_url);
         });
     });
 });

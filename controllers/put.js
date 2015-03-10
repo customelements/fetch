@@ -84,53 +84,54 @@ Controller.prototype.fetchRepo = function(owner, name, pkg) {
 
 Controller.prototype.reduce = function(data) {
     var self = this;
-    var reducedData = [];
+    var reducedData = {};
 
     data.forEach(function(elem) {
         self.request.log(['#reduce'], 'Create new Repository() ' + elem[1].full_name);
 
-        reducedData.push(
-            new Repository({
-                bower: {
-                    name: elem[0].bower.name,
-                    keywords: elem[0].bower.keywords
-                },
-                npm: {
-                    name: elem[0].npm.name,
-                    keywords: elem[0].npm.keywords
-                },
-                github: {
-                    id: elem[1].id,
-                    name: elem[1].name,
-                    full_name: elem[1].full_name,
-                    description: elem[1].description,
-                    html_url: elem[1].html_url,
-                    homepage: elem[1].homepage,
-                    size: elem[1].size,
+        var repo = new Repository({
+            bower: {
+                name: elem[0].bower.name,
+                keywords: elem[0].bower.keywords
+            },
+            npm: {
+                name: elem[0].npm.name,
+                keywords: elem[0].npm.keywords
+            },
+            github: {
+                id: elem[1].id,
+                name: elem[1].name,
+                full_name: elem[1].full_name,
+                description: elem[1].description,
+                html_url: elem[1].html_url,
+                homepage: elem[1].homepage,
+                size: elem[1].size,
 
-                    created_at: elem[1].created_at,
-                    updated_at: elem[1].updated_at,
-                    pushed_at: elem[1].pushed_at,
+                created_at: elem[1].created_at,
+                updated_at: elem[1].updated_at,
+                pushed_at: elem[1].pushed_at,
 
-                    subscribers_count: elem[1].subscribers_count,
-                    open_issues_count: elem[1].open_issues_count,
-                    stargazers_count: elem[1].stargazers_count,
-                    forks_count: elem[1].forks_count,
+                subscribers_count: elem[1].subscribers_count,
+                open_issues_count: elem[1].open_issues_count,
+                stargazers_count: elem[1].stargazers_count,
+                forks_count: elem[1].forks_count,
 
-                    has_issues: elem[1].has_issues,
-                    has_downloads: elem[1].has_downloads,
-                    has_wiki: elem[1].has_wiki,
-                    has_pages: elem[1].has_pages,
+                has_issues: elem[1].has_issues,
+                has_downloads: elem[1].has_downloads,
+                has_wiki: elem[1].has_wiki,
+                has_pages: elem[1].has_pages,
 
-                    owner: {
-                        id: elem[1].owner.id,
-                        login: elem[1].owner.login,
-                        avatar_url: elem[1].owner.avatar_url,
-                        html_url: elem[1].owner.html_url
-                    }
+                owner: {
+                    id: elem[1].owner.id,
+                    login: elem[1].owner.login,
+                    avatar_url: elem[1].owner.avatar_url,
+                    html_url: elem[1].owner.html_url
                 }
-            }).toJSON()
-        );
+            }
+        }).toJSON();
+
+        var id = Object.keys(repo)[0];
+        reducedData[id] = repo[id];
     });
 
     return reducedData;

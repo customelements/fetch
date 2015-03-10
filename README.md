@@ -32,47 +32,45 @@ curl -X GET fetch.customelements.io
 ```
 
 ```js
-[
-    "bower": {
-        "name": "voice-elements",
-        "keywords": ["Polymer"]
-    },
-    "npm": {
-        "name": "",
-        "keywords": []
-    },
-    "github": {
-        "id": 18821483,
-        "name": "voice-elements",
-        "full_name": "zenorocha/voice-elements",
-        "description": "Web Component wrapper to the Web Speech API, that allows you to do voice recognition and speech synthesis using Polymer",
-        "html_url": "https://github.com/zenorocha/voice-elements",
-        "homepage": "http://zenorocha.github.io/voice-elements",
-        "size": 1472,
-
-        "created_at": "2014-04-16T00:48:46Z",
-        "updated_at": "2015-03-02T02:23:32Z",
-        "pushed_at": "2014-11-26T18:57:10Z",
-
-        "subscribers_count": 47,
-        "open_issues_count": 9,
-        "stargazers_count": 972,
-        "forks_count": 154,
-
-        "has_issues": true,
-        "has_downloads": true,
-        "has_wiki": true,
-        "has_pages": true,
-
-        "owner": {
-            "id": 398893,
-            "login": "zenorocha",
-            "avatar_url": "https://avatars.githubusercontent.com/u/398893?v=3",
-            "html_url": "https://github.com/zenorocha"
+{
+    "allmobilize/amazeui": {
+        "bower": {
+            "name": "amazeui",
+            "keywords": ["web-components"]
+        },
+        "npm": {
+            "name": "amazeui",
+            "keywords": ["web-components"]
+        },
+        "github": {
+            "id": 22607013,
+            "name": "amazeui",
+            "full_name": "allmobilize/amazeui",
+            "description": "Amaze UI, a mobile-first and modular front-end framework.",
+            "html_url": "https://github.com/allmobilize/amazeui",
+            "homepage": "http://amazeui.org/",
+            "size": 20935,
+            "created_at": "2014-08-04T14:23:37Z",
+            "updated_at": "2015-03-10T10:35:39Z",
+            "pushed_at": "2015-03-09T07:46:24Z",
+            "subscribers_count": 304,
+            "open_issues_count": 28,
+            "stargazers_count": 2577,
+            "forks_count": 855,
+            "has_issues": true,
+            "has_downloads": true,
+            "has_wiki": true,
+            "has_pages": false,
+            "owner": {
+                "id": 3197643,
+                "login": "allmobilize",
+                "avatar_url": "https://avatars.githubusercontent.com/u/3197643?v=3",
+                "html_url": "https://github.com/allmobilize"
+            }
         }
     },
     {...}
-]
+}
 ```
 
 ---
@@ -100,28 +98,19 @@ curl -X GET fetch.customelements.io/packages
 ```
 
 ```js
-[
-    {
+{
+    "kentaromiura/custom-element": {
         "bower": {
-            "name": "codepen-embed",
-            "keywords": [
-                "codepen",
-                "polymer",
-                "web-components",
-                "embed"
-            ]
+            "name": "custom-element",
+            "keywords": ["web-components"]
         },
         "npm": {
-            "name": "",
-            "keywords": []
-        },
-        "github": {
-            "owner": "Jupiterrr",
-            "name": "codepen-embed-component"
+            "name": "declarative-custom-element",
+            "keywords": ["web-components"]
         }
     },
     {...}
-]
+}
 ```
 
 ---
@@ -147,28 +136,16 @@ curl -X GET fetch.customelements.io/packages/bower
 ```
 
 ```js
-[
-    {
+{
+    "zenorocha/voice-elements": {
         "bower": {
-            "name": "codepen-embed",
-            "keywords": [
-                "codepen",
-                "polymer",
-                "web-components",
-                "embed"
-            ]
+            "name": "voice-elements",
+            "keywords": ["web-components"]
         },
-        "npm": {
-            "name": "",
-            "keywords": []
-        },
-        "github": {
-            "owner": "Jupiterrr",
-            "name": "codepen-embed-component"
-        }
+        "npm": {}
     },
     {...}
-]
+}
 ```
 
 ---
@@ -195,27 +172,16 @@ curl -X GET fetch.customelements.io/packages/npm
 ```
 
 ```js
-[
-    {
-        "bower": {
-            "name": "",
-            "keywords": []
-        },
+{
+    "jorgecasar/input-password": {
+        "bower": {},
         "npm": {
-            "name": "declarative-custom-element",
-            "keywords": [
-                "web-component",
-                "web-components",
-                "custom-element"
-            ]
-        },
-        "github": {
-            "owner": "kentaromiura",
-            "name": "custom-element"
+            "name": "input-password",
+            "keywords": ["web-components"]
         }
     },
     {...}
-]
+}
 ```
 
 ## License

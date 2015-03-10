@@ -1,0 +1,45 @@
+{
+    "bower": {
+        "name": "voice-elements",
+        "keywords": [
+            "polymer",
+            "speech",
+            "speech-synthesis",
+            "voice",
+            "voice-player",
+            "voice-recognition",
+            "web-speech",
+            "web-components"
+        ]
+    },
+    "npm": {
+        "name": "",
+        "keywords": []
+    },
+    "github": {
+        "id": 18821483,
+        "name": "voice-elements",
+        "full_name": "zenorocha/voice-elements",
+        "description": "Web Component wrapper to the Web Speech API, that allows you to do voice recognition and speech synthesis using Polymer",
+        "html_url": "https://github.com/zenorocha/voice-elements",
+        "homepage": "http://zenorocha.github.io/voice-elements",
+        "size": 1472,
+        "created_at": "2014-04-16T00:48:46Z",
+        "updated_at": "2015-03-09T19:42:31Z",
+        "pushed_at": "2014-11-26T18:57:10Z",
+        "subscribers_count": 48,
+        "open_issues_count": 9,
+        "stargazers_count": 982,
+        "forks_count": 157,
+        "has_issues": true,
+        "has_downloads": true,
+        "has_wiki": true,
+        "has_pages": true,
+        "owner": {
+            "id": 398893,
+            "login": "zenorocha",
+            "avatar_url": "https://avatars.githubusercontent.com/u/398893?v=3",
+            "html_url": "https://github.com/zenorocha"
+        }
+    }
+}
