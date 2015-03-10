@@ -33,7 +33,7 @@ curl -X GET fetch.customelements.io
 
 ```js
 {
-    "allmobilize/amazeui": {
+    "22607013": {
         "bower": {
             "name": "amazeui",
             "keywords": ["web-components"]

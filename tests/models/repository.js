@@ -46,7 +46,7 @@ describe('Repository', function() {
     });
 
     describe('#toJSON', function() {
-        var id = 'zenorocha/voice-elements';
+        var id = '18821483';
         var input = require('./fixtures/repository-input.json');
         var output = require('./fixtures/repository-output.json');
 

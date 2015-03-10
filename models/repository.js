@@ -49,7 +49,7 @@ function Repository(options) {
 
 Repository.prototype.toJSON = function() {
     var obj = {};
-    var id = this.github.full_name;
+    var id = this.github.id;
 
     obj[id] = {
         bower: {
