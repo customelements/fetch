@@ -1,5 +1,3 @@
-require('newrelic');
-
 var env = require('./configs/env.js');
 var Hapi = require('hapi');
 
