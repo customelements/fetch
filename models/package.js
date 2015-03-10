@@ -7,43 +7,41 @@ function Package(options) {
     options.github = options.github || {};
 
     this.bower = {
-        name: options.bower.name || '',
-        keywords: options.bower.keywords || []
+        name: options.bower.name,
+        keywords: options.bower.keywords
     };
 
     this.npm = {
-        name: options.npm.name || '',
-        keywords: options.npm.keywords || []
+        name: options.npm.name,
+        keywords: options.npm.keywords
     };
 
     this.github = {
-        url: githubUrl(options.github.url) || ''
+        url: options.github.url
     };
 }
 
-Package.prototype.githubOwner = function() {
-    return this.github.url.user || '';
-};
-
-Package.prototype.githubRepo = function() {
-    return this.github.url.repo || '';
+Package.prototype.shorthand = function(url) {
+    var obj = githubUrl(url);
+    return obj.user + '/' + obj.repo;
 };
 
 Package.prototype.toJSON = function() {
-    return {
+    var obj = {};
+    var id = this.shorthand(this.github.url);
+
+    obj[id] = {
         bower: {
             name: this.bower.name,
-            keywords: this.bower.keywords,
+            keywords: this.bower.keywords
         },
         npm: {
             name: this.npm.name,
-            keywords: this.npm.keywords,
-        },
-        github: {
-            owner: this.githubOwner(),
-            name: this.githubRepo()
+            keywords: this.npm.keywords
         }
     };
+
+    return obj;
 };
 
 module.exports = Package;

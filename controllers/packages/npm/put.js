@@ -46,22 +46,23 @@ Controller.prototype.fetchAll = function(packages) {
 
 Controller.prototype.reduce = function(data) {
     var self = this;
-    var reducedData = [];
+    var reducedData = {};
 
     data.forEach(function(elem) {
         self.request.log(['#reduce'], 'Create new Package() from: ' + elem.name);
 
-        reducedData.push(
-            new Package({
-                npm: {
-                    name: elem.name,
-                    keywords: elem.keywords
-                },
-                github: {
-                    url: elem.repository.url
-                }
-            }).toJSON()
-        );
+        var pkg = new Package({
+            npm: {
+                name: elem.name,
+                keywords: elem.keywords
+            },
+            github: {
+                url: elem.repository.url
+            }
+        }).toJSON();
+
+        var id = Object.keys(pkg)[0];
+        reducedData[id] = pkg[id];
     });
 
     return reducedData;

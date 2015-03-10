@@ -19,65 +19,31 @@ describe('Package', function() {
         });
     });
 
-    describe('#githubOwner', function() {
-        var options = {
-            bower: {
-                name: 'voice-elements',
-                keywords: ['polymer']
-            },
-            github: {
-                url: 'https://github.com/zenorocha/voice-elements'
-            }
-        };
+    describe('#shorthand', function() {
+        var input = 'https://github.com/zenorocha/voice-elements';
+        var output = 'zenorocha/voice-elements';
 
-        it('returns github owner', function() {
-            var pkg = new Package(options);
-            assert.equal(pkg.githubOwner(), 'zenorocha');
-        });
-    });
+        it('returns github repo shorthand', function() {
+            var pkg = new Package();
+            var id = pkg.shorthand(input);
 
-    describe('#githubRepo', function() {
-        var options = {
-            bower: {
-                name: 'voice-elements',
-                keywords: ['polymer']
-            },
-            github: {
-                url: 'https://github.com/zenorocha/voice-elements'
-            }
-        };
-
-        it('returns github repo', function() {
-            var pkg = new Package(options);
-            assert.equal(pkg.githubRepo(), 'voice-elements');
+            assert.deepEqual(id, output);
         });
     });
 
     describe('#toJSON', function() {
-        var options = {
-            bower: {
-                name: 'voice-elements',
-                keywords: ['polymer']
-            },
-            npm: {
-                name: 'voice-elements',
-                keywords: ['polymer']
-            },
-            github: {
-                url: 'https://github.com/zenorocha/voice-elements'
-            }
-        };
+        var id = 'zenorocha/voice-elements';
+        var input = require('./package-input.json');
+        var output = require('./package-output.json');
 
-        it('returns object as json', function() {
-            var pkg = new Package(options);
+        it('returns manipulated object as json', function() {
+            var pkg = new Package(input);
             var json = pkg.toJSON();
 
-            assert.equal(json.bower.name, options.bower.name);
-            assert.equal(json.bower.keywords, options.bower.keywords);
-            assert.equal(json.npm.name, options.npm.name);
-            assert.equal(json.npm.keywords, options.npm.keywords);
-            assert.equal(json.github.owner, 'zenorocha');
-            assert.equal(json.github.name, 'voice-elements');
+            assert.deepEqual(json[id].bower.name, output[id].bower.name);
+            assert.deepEqual(json[id].bower.keywords, output[id].bower.keywords);
+            assert.deepEqual(json[id].npm.name, output[id].npm.name);
+            assert.deepEqual(json[id].npm.keywords, output[id].npm.keywords);
         });
     });
 });

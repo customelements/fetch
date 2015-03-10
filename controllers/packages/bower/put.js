@@ -30,22 +30,23 @@ Controller.prototype.init = function() {
 
 Controller.prototype.reduce = function(data) {
     var self = this;
-    var reducedData = [];
+    var reducedData = {};
 
     data.forEach(function(elem) {
         self.request.log(['#reduce'], 'Create new Package() from: ' + elem.name);
 
-        reducedData.push(
-            new Package({
-                bower: {
-                    name: elem.name,
-                    keywords: elem.keywords
-                },
-                github: {
-                    url: elem.website
-                }
-            }).toJSON()
-        );
+        var pkg = new Package({
+            bower: {
+                name: elem.name,
+                keywords: elem.keywords
+            },
+            github: {
+                url: elem.website
+            }
+        }).toJSON();
+
+        var id = Object.keys(pkg)[0];
+        reducedData[id] = pkg[id];
     });
 
     return reducedData;

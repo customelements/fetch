@@ -1,7 +1,9 @@
+var _ = require('lodash');
 var boom = require('boom');
 var db = require('../utils/db');
 var fetch = require('../utils/fetch');
 var github = require('../configs/github');
+var githubUrl = require('github-url-to-object');
 var Repository = require('../models/repository');
 
 function Controller(request, reply) {
@@ -38,35 +40,44 @@ Controller.prototype.fetchAll = function(packages) {
     var self = this;
     var promises = [];
 
-    packages.forEach(function(pkg) {
+    _.forIn(packages, function(value, key) {
+        var url = githubUrl(key);
+
         promises.push(
-            self.fetchRepo(pkg)
+            self.fetchRepo(url.user, url.repo, value)
         );
     });
 
     return Promise.all(promises);
 };
 
-Controller.prototype.fetchRepo = function(pkg) {
+Controller.prototype.fetchRepo = function(owner, name, pkg) {
     var self = this;
 
     return new Promise(function(resolve, reject) {
-        self.request.log(['#fetchRepo'], 'Request GitHub API to: ' + pkg.github.owner + '/' + pkg.github.name);
-
         github().repos.get({
-            user: pkg.github.owner,
-            repo: pkg.github.name
+            user: owner,
+            repo: name
         }, function(error, repo) {
             if (error) {
                 var err = error.toJSON();
-                var errorCode = err.code;
-                var errorMsg = JSON.parse(err.message).message || err.message;
-                var errorInfo = 'Error when requesting repo: ' + pkg.github.owner + '/' + pkg.github.name;
+                var errorCode = parseInt(err.code, 10);
+                var errorMsg = '';
 
-                reject(boom.create(errorCode, errorMsg, errorInfo));
+                try {
+                    errorMsg = JSON.parse(err.message).message;
+                }
+                catch(e) {
+                    errorMsg = err.message;
+                }
+
+                self.request.log(['#fetchRepo'], 'Request failed: ' + owner + '/' + name);
+                reject(boom.create(errorCode, errorMsg));
             }
-
-            resolve([pkg, repo]);
+            else {
+                self.request.log(['#fetchRepo'], 'Request succeed: ' + owner + '/' + name);
+                resolve([pkg, repo]);
+            }
         });
     });
 };
@@ -76,7 +87,7 @@ Controller.prototype.reduce = function(data) {
     var reducedData = [];
 
     data.forEach(function(elem) {
-        self.request.log(['#reduce'], 'Create new Repository() ' + elem[1].full_name + ' from ' + elem[0].bower.name);
+        self.request.log(['#reduce'], 'Create new Repository() ' + elem[1].full_name);
 
         reducedData.push(
             new Repository({

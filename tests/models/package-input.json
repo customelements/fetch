@@ -1,0 +1,10 @@
+{
+    "bower": {
+        "name": "voice-elements",
+        "keywords": ["polymer", "speech"]
+    },
+    "npm": {},
+    "github": {
+        "url": "https://github.com/zenorocha/voice-elements"
+    }
+}
