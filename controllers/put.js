@@ -4,7 +4,6 @@ var db = require('../utils/db');
 var fetch = require('../utils/fetch');
 var github = require('../configs/github');
 var githubUrl = require('github-url-to-object');
-var Repository = require('../models/repository');
 
 function Controller(request, reply) {
     this.request = request;
@@ -87,9 +86,9 @@ Controller.prototype.reduce = function(data) {
     var reducedData = {};
 
     data.forEach(function(elem) {
-        self.request.log(['#reduce'], 'Create new Repository() ' + elem[1].full_name);
+        self.request.log(['#reduce'], 'Create new repository: ' + elem[1].full_name);
 
-        var repo = new Repository({
+        var repo = {
             bower: {
                 name: elem[0].bower.name,
                 keywords: elem[0].bower.keywords
@@ -128,10 +127,10 @@ Controller.prototype.reduce = function(data) {
                     html_url: elem[1].owner.html_url
                 }
             }
-        }).toJSON();
+        };
 
-        var id = Object.keys(repo)[0];
-        reducedData[id] = repo[id];
+        var id = repo.github.id;
+        reducedData[id] = repo;
     });
 
     return reducedData;
