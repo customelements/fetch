@@ -1,6 +1,6 @@
 var db = require('../../../utils/db');
 var fetch = require('../../../utils/fetch');
-var Package = require('../../../models/package');
+var github = require('../../../utils/github');
 
 function Controller(request, reply) {
     this.request = request;
@@ -49,23 +49,32 @@ Controller.prototype.reduce = function(data) {
     var reducedData = {};
 
     data.forEach(function(elem) {
-        self.request.log(['#reduce'], 'Create new Package() from: ' + elem.name);
+        if (!elem.repository || !github.isValidUrl(elem.repository.url)) {
+            return;
+        }
 
-        var pkg = new Package({
+        self.request.log(['#reduce'], 'Create new package: ' + elem.name);
+
+        var ghID = github.toShorthand(elem.repository.url);
+        var ghURL = github.toHttps(elem.repository.url);
+
+        var pkg = {
             npm: {
                 name: elem.name,
                 keywords: elem.keywords
             },
             github: {
-                url: elem.repository.url
+                url: ghURL
             }
-        }).toJSON();
+        };
 
-        var id = Object.keys(pkg)[0];
-        reducedData[id] = pkg[id];
+        reducedData[ghID] = pkg;
     });
 
     return reducedData;
 };
 
+
+
 module.exports = Controller;
+

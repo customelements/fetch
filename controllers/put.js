@@ -129,8 +129,8 @@ Controller.prototype.reduce = function(data) {
             }
         };
 
-        var id = repo.github.id;
-        reducedData[id] = repo;
+        var ghID = repo.github.id;
+        reducedData[ghID] = repo;
     });
 
     return reducedData;

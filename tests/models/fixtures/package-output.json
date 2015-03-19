@@ -1,9 +1,0 @@
-{
-    "zenorocha/voice-elements": {
-        "bower": {
-            "name": "voice-elements",
-            "keywords": ["polymer", "speech"]
-        },
-        "npm": {}
-    }
-}
