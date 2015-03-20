@@ -1,7 +1,7 @@
 var assert = require('chai').assert;
 var controller = require('../../../controllers/packages/put');
 
-describe('PUT /packages', function() {
+describe('PUT /repos', function() {
     describe('controller', function() {
         // TODO: Write test case
     });
