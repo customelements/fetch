@@ -24,7 +24,8 @@
     "mocha": "^2.1.0"
   },
   "engines": {
-    "node": "0.11.x"
+    "node": "0.12",
+    "npm": "2.x"
   },
   "repository": {
     "type": "git",
