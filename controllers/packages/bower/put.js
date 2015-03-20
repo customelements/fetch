@@ -22,9 +22,8 @@ Controller.prototype.init = function() {
             return db.set('packages:bower', result);
         })
         .then(function(result) {
-            self.request.log(['#db.set'], 'Done with promise');
-            result = null;
-            return self.reply().code(200);
+            request.log(['#db.set'], 'Done with promise');
+            return reply(result);
         })
         .catch(self.reply);
 };

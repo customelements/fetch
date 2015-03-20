@@ -30,8 +30,7 @@ Controller.prototype.init = function() {
         })
         .then(function(result) {
             self.request.log(['#db.set'], 'Done with promise');
-            result = null;
-            return self.reply().code(200);
+            return self.reply(result);
         })
         .catch(self.reply);
 };
@@ -90,14 +89,6 @@ Controller.prototype.reduce = function(data) {
         self.request.log(['#reduce'], 'Create repository: ' + elem[1].full_name);
 
         var repo = {
-            bower: {
-                name: elem[0].bower.name,
-                keywords: elem[0].bower.keywords
-            },
-            npm: {
-                name: elem[0].npm.name,
-                keywords: elem[0].npm.keywords
-            },
             github: {
                 id: elem[1].id,
                 name: elem[1].name,
@@ -129,6 +120,20 @@ Controller.prototype.reduce = function(data) {
                 }
             }
         };
+
+        if (elem[0].bower) {
+            repo.bower = {
+                name: elem[0].bower.name,
+                keywords: elem[0].bower.keywords
+            };
+        }
+
+        if (elem[0].npm) {
+            repo.npm = {
+                name: elem[0].npm.name,
+                keywords: elem[0].npm.keywords
+            };
+        }
 
         var ghID = repo.github.id;
         reducedData[ghID] = repo;
