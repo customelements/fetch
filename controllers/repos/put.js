@@ -1,8 +1,8 @@
 var _ = require('lodash');
 var boom = require('boom');
-var db = require('../utils/db');
-var fetch = require('../utils/fetch');
-var github = require('../configs/github');
+var db = require('../../utils/db');
+var fetch = require('../../utils/fetch');
+var github = require('../../configs/github');
 var githubUrl = require('github-url-to-object');
 
 function controller(request, reply) {

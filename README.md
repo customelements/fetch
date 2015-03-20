@@ -10,7 +10,7 @@ Built with [Node](http://nodejs.org/), [Hapi](http://hapijs.com/), and [Redis](h
 
 ## APIs
 
-### PUT `/`
+### PUT `/repos`
 
 1. Fetches `/packages`.
 2. Requests GitHub API for each repo.
@@ -23,7 +23,7 @@ curl -X PUT fetch.customelements.io
 
 ---
 
-### GET `/`
+### GET `/repos`
 
 1. Gets data from Redis based on the operation above.
 
@@ -141,8 +141,7 @@ curl -X GET fetch.customelements.io/packages/bower
         "bower": {
             "name": "voice-elements",
             "keywords": ["web-components"]
-        },
-        "npm": {}
+        }
     },
     {...}
 }
@@ -174,7 +173,6 @@ curl -X GET fetch.customelements.io/packages/npm
 ```js
 {
     "jorgecasar/input-password": {
-        "bower": {},
         "npm": {
             "name": "input-password",
             "keywords": ["web-components"]

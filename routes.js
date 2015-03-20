@@ -5,18 +5,25 @@ module.exports = [
         method: 'GET',
         path: '/',
         handler: function(request, reply) {
-            db.get('all').then(reply).catch(reply);
+            return reply().code(200);
+        }
+    },
+    {
+        method: 'GET',
+        path: '/repos',
+        handler: function(request, reply) {
+            return db.get('all').then(reply).catch(reply);
         }
     }, {
         method: 'PUT',
-        path: '/',
-        handler: require('./controllers/put.js')
+        path: '/repos',
+        handler: require('./controllers/repos/put.js')
     },
     {
         method: 'GET',
         path: '/packages',
         handler: function(request, reply) {
-            db.get('packages').then(reply).catch(reply);
+            return db.get('packages').then(reply).catch(reply);
         }
     }, {
         method: 'PUT',
@@ -26,7 +33,7 @@ module.exports = [
         method: 'GET',
         path: '/packages/bower',
         handler: function(request, reply) {
-            db.get('packages:bower').then(reply).catch(reply);
+            return db.get('packages:bower').then(reply).catch(reply);
         }
     }, {
         method: 'PUT',
@@ -36,7 +43,7 @@ module.exports = [
         method: 'GET',
         path: '/packages/npm',
         handler: function(request, reply) {
-            db.get('packages:npm').then(reply).catch(reply);
+            return db.get('packages:npm').then(reply).catch(reply);
         }
     }, {
         method: 'PUT',
