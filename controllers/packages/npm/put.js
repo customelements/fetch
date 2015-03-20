@@ -27,7 +27,8 @@ Controller.prototype.init = function() {
         })
         .then(function(result) {
             self.request.log(['#db.set'], 'Done with promise');
-            return self.reply(result);
+            result = null;
+            return self.reply().code(200);
         })
         .catch(self.reply);
 };
@@ -53,7 +54,7 @@ Controller.prototype.reduce = function(data) {
             return;
         }
 
-        self.request.log(['#reduce'], 'Create new package: ' + elem.name);
+        self.request.log(['#reduce'], 'Create npm package: ' + elem.name);
 
         var ghID = github.toShorthand(elem.repository.url);
         var ghURL = github.toHttps(elem.repository.url);

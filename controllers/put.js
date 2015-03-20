@@ -30,7 +30,8 @@ Controller.prototype.init = function() {
         })
         .then(function(result) {
             self.request.log(['#db.set'], 'Done with promise');
-            return self.reply(result);
+            result = null;
+            return self.reply().code(200);
         })
         .catch(self.reply);
 };
@@ -86,7 +87,7 @@ Controller.prototype.reduce = function(data) {
     var reducedData = {};
 
     data.forEach(function(elem) {
-        self.request.log(['#reduce'], 'Create new repository: ' + elem[1].full_name);
+        self.request.log(['#reduce'], 'Create repository: ' + elem[1].full_name);
 
         var repo = {
             bower: {

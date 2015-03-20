@@ -27,7 +27,8 @@ Controller.prototype.init = function() {
     })
     .then(function(result) {
         self.request.log(['#db.set'], 'Done with promise');
-        return self.reply(result);
+        result = null;
+        return self.reply().code(200);
     })
     .catch(self.reply);
 };
