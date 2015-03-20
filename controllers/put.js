@@ -5,54 +5,42 @@ var fetch = require('../utils/fetch');
 var github = require('../configs/github');
 var githubUrl = require('github-url-to-object');
 
-function Controller(request, reply) {
-    this.request = request;
-    this.reply = reply;
-
-    this.init();
-}
-
-Controller.prototype.init = function() {
-    var self = this;
-
+function controller(request, reply) {
     fetch('http://fetch.customelements.io/packages')
         .then(function(result) {
-            self.request.log(['#fetch'], 'Done with promise');
-            return self.fetchAll(result);
+            request.log(['#fetch'], 'Done with promise');
+            return controller.fetchAll(result, request);
         })
         .then(function(result) {
-            self.request.log(['#fetchAll'], 'Done with promise');
-            return self.reduce(result);
+            request.log(['#fetchAll'], 'Done with promise');
+            return controller.reduce(result, request);
         })
         .then(function(result) {
-            self.request.log(['#reduce'], 'Done with promise');
+            request.log(['#reduce'], 'Done with promise');
             return db.set('all', result);
         })
         .then(function(result) {
-            self.request.log(['#db.set'], 'Done with promise');
-            return self.reply(result);
+            request.log(['#db.set'], 'Done with promise');
+            return reply(result);
         })
-        .catch(self.reply);
-};
+        .catch(reply);
+}
 
-Controller.prototype.fetchAll = function(packages) {
-    var self = this;
+controller.fetchAll = function(packages, request) {
     var promises = [];
 
     _.forIn(packages, function(value, key) {
         var url = githubUrl(key);
 
         promises.push(
-            self.fetchRepo(url.user, url.repo, value)
+            controller.fetchRepo(url.user, url.repo, value, request)
         );
     });
 
     return Promise.all(promises);
 };
 
-Controller.prototype.fetchRepo = function(owner, name, pkg) {
-    var self = this;
-
+controller.fetchRepo = function(owner, name, pkg, request) {
     return new Promise(function(resolve, reject) {
         github().repos.get({
             user: owner,
@@ -70,23 +58,22 @@ Controller.prototype.fetchRepo = function(owner, name, pkg) {
                     errorMsg = err.message;
                 }
 
-                self.request.log(['#fetchRepo'], 'Request failed: ' + owner + '/' + name);
+                request.log(['#fetchRepo'], 'Request failed: ' + owner + '/' + name);
                 reject(boom.create(errorCode, errorMsg));
             }
             else {
-                self.request.log(['#fetchRepo'], 'Request succeed: ' + owner + '/' + name);
+                request.log(['#fetchRepo'], 'Request succeed: ' + owner + '/' + name);
                 resolve([pkg, repo]);
             }
         });
     });
 };
 
-Controller.prototype.reduce = function(data) {
-    var self = this;
+controller.reduce = function(data, request) {
     var reducedData = {};
 
     data.forEach(function(elem) {
-        self.request.log(['#reduce'], 'Create repository: ' + elem[1].full_name);
+        request.log(['#reduce'], 'Create repository: ' + elem[1].full_name);
 
         var repo = {
             github: {
@@ -142,4 +129,4 @@ Controller.prototype.reduce = function(data) {
     return reducedData;
 };
 
-module.exports = Controller;
+module.exports = controller;

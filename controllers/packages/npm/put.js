@@ -2,37 +2,28 @@ var db = require('../../../utils/db');
 var fetch = require('../../../utils/fetch');
 var github = require('../../../utils/github');
 
-function Controller(request, reply) {
-    this.request = request;
-    this.reply = reply;
-
-    this.init();
-}
-
-Controller.prototype.init = function() {
-    var self = this;
-
+function controller(request, reply) {
     fetch('https://skimdb.npmjs.com/registry/_design/app/_view/byKeyword?startkey=%5B%22web-components%22%5D&endkey=%5B%22web-components%22,%7B%7D%5D&group_level=3')
         .then(function(result) {
-            self.request.log(['#fetch'], 'Done with promise');
-            return self.fetchAll(result.rows);
+            request.log(['#fetch'], 'Done with promise');
+            return controller.fetchAll(result.rows);
         })
         .then(function(result) {
-            self.request.log(['#fetchAll'], 'Done with promise');
-            return self.reduce(result);
+            request.log(['#fetchAll'], 'Done with promise');
+            return controller.reduce(result, request);
         })
         .then(function(result) {
-            self.request.log(['#reduce'], 'Done with promise');
+            request.log(['#reduce'], 'Done with promise');
             return db.set('packages:npm', result);
         })
         .then(function(result) {
-            self.request.log(['#db.set'], 'Done with promise');
-            return self.reply(result);
+            request.log(['#db.set'], 'Done with promise');
+            return reply(result);
         })
-        .catch(self.reply);
-};
+        .catch(reply);
+}
 
-Controller.prototype.fetchAll = function(packages) {
+controller.fetchAll = function(packages) {
     var promises = [];
 
     packages.forEach(function(pkg) {
@@ -44,8 +35,7 @@ Controller.prototype.fetchAll = function(packages) {
     return Promise.all(promises);
 };
 
-Controller.prototype.reduce = function(data) {
-    var self = this;
+controller.reduce = function(data, request) {
     var reducedData = {};
 
     data.forEach(function(elem) {
@@ -53,7 +43,7 @@ Controller.prototype.reduce = function(data) {
             return;
         }
 
-        self.request.log(['#reduce'], 'Create npm package: ' + elem.name);
+        request.log(['#reduce'], 'Create npm package: ' + elem.name);
 
         var ghID = github.toShorthand(elem.repository.url);
         var ghURL = github.toHttps(elem.repository.url);
@@ -76,5 +66,5 @@ Controller.prototype.reduce = function(data) {
 
 
 
-module.exports = Controller;
+module.exports = controller;
 

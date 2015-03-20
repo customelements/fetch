@@ -10,10 +10,7 @@ module.exports = [
     }, {
         method: 'PUT',
         path: '/',
-        handler: function(request, reply) {
-            var Controller = require('./controllers/put.js');
-            new Controller(request, reply);
-        }
+        handler: require('./controllers/put.js')
     },
     {
         method: 'GET',
@@ -24,10 +21,7 @@ module.exports = [
     }, {
         method: 'PUT',
         path: '/packages',
-        handler: function(request, reply) {
-            var Controller = require('./controllers/packages/put.js');
-            new Controller(request, reply);
-        }
+        handler: require('./controllers/packages/put.js')
     }, {
         method: 'GET',
         path: '/packages/bower',
@@ -37,10 +31,7 @@ module.exports = [
     }, {
         method: 'PUT',
         path: '/packages/bower',
-        handler: function(request, reply) {
-            var Controller = require('./controllers/packages/bower/put.js');
-            new Controller(request, reply);
-        }
+        handler: require('./controllers/packages/bower/put.js')
     }, {
         method: 'GET',
         path: '/packages/npm',
@@ -50,9 +41,6 @@ module.exports = [
     }, {
         method: 'PUT',
         path: '/packages/npm',
-        handler: function(request, reply) {
-            var Controller = require('./controllers/packages/npm/put.js');
-            new Controller(request, reply);
-        }
+        handler: require('./controllers/packages/npm/put.js')
     }
 ];

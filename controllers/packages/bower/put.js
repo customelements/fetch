@@ -2,34 +2,24 @@ var db = require('../../../utils/db');
 var fetch = require('../../../utils/fetch');
 var github = require('../../../utils/github');
 
-function Controller(request, reply) {
-    this.request = request;
-    this.reply = reply;
-
-    this.init();
-}
-
-Controller.prototype.init = function() {
-    var self = this;
-
+function controller(request, reply) {
     fetch('https://bower-component-list.herokuapp.com/keyword/web-components')
         .then(function(result) {
-            self.request.log(['#fetch'], 'Done with promise');
-            return self.reduce(result);
+            request.log(['#fetch'], 'Done with promise');
+            return controller.reduce(result, request);
         })
         .then(function(result) {
-            self.request.log(['#reduce'], 'Done with promise');
+            request.log(['#reduce'], 'Done with promise');
             return db.set('packages:bower', result);
         })
         .then(function(result) {
             request.log(['#db.set'], 'Done with promise');
             return reply(result);
         })
-        .catch(self.reply);
-};
+        .catch(reply);
+}
 
-Controller.prototype.reduce = function(data) {
-    var self = this;
+controller.reduce = function(data, request) {
     var reducedData = {};
 
     data.forEach(function(elem) {
@@ -37,7 +27,7 @@ Controller.prototype.reduce = function(data) {
             return;
         }
 
-        self.request.log(['#reduce'], 'Create bower package: ' + elem.name);
+        request.log(['#reduce'], 'Create bower package: ' + elem.name);
 
         var ghID = github.toShorthand(elem.website);
         var ghURL = github.toHttps(elem.website);
@@ -58,4 +48,4 @@ Controller.prototype.reduce = function(data) {
     return reducedData;
 };
 
-module.exports = Controller;
+module.exports = controller;
