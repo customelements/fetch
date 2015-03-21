@@ -16,9 +16,9 @@ function controller(request, reply) {
         request.log(['#_.merge'], 'Done with promise');
         return db.set('packages', result);
     })
-    .then(function(result) {
+    .then(function() {
         request.log(['#db.set'], 'Done with promise');
-        return reply(result);
+        return reply().code(200);
     })
     .catch(reply);
 }

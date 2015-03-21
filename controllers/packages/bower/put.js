@@ -12,9 +12,9 @@ function controller(request, reply) {
             request.log(['#reduce'], 'Done with promise');
             return db.set('packages:bower', result);
         })
-        .then(function(result) {
+        .then(function() {
             request.log(['#db.set'], 'Done with promise');
-            return reply(result);
+            return reply().code(200);
         })
         .catch(reply);
 }
