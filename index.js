@@ -11,8 +11,6 @@ server.connection({
     port: process.env.PORT || 3000
 });
 
-// -- Routes -------------------------------------------------------------------
-
 server.route(require('./routes'));
 
 // -- Start --------------------------------------------------------------------
@@ -22,12 +20,12 @@ server.register({
     options: {
         reporters: [{
             reporter: require('good-console'),
-            args:[{
+            events: {
                 log: '*',
                 error: '*',
                 request: '*',
                 response: '*'
-            }]
+            }
         }]
     }
 }, function (err) {
