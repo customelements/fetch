@@ -16,6 +16,7 @@
     "good-console": "^4.1.0",
     "hapi": "^8.2.0",
     "lodash": "^3.4.0",
+    "newrelic": "^1.18.5",
     "redis": "^0.12.1",
     "request": "^2.53.0"
   },
