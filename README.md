@@ -8,8 +8,7 @@
 
 Built with [Node](http://nodejs.org/), [Hapi](http://hapijs.com/), and [Redis](http://redis.io/). Hosted on [Heroku](https://heroku.com/). Monitored on [New Relic](https://newrelic.com/).
 
-## APIs
-
+## API endpoints
 
 ### GET `/limit`
 
