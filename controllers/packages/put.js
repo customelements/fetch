@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var blacklist = require('../../data/blacklist');
 var boom = require('boom');
 var db = require('../../utils/db');
 var fetch = require('../../utils/fetch');
@@ -14,6 +15,10 @@ function controller(request, reply) {
     })
     .then(function(result) {
         request.log(['#_.merge'], 'Done with promise');
+        return controller.blacklist(result);
+    })
+    .then(function(result) {
+        request.log(['#blacklist'], 'Done with promise');
         return db.set('packages', result);
     })
     .then(function() {
@@ -22,5 +27,13 @@ function controller(request, reply) {
     })
     .catch(reply);
 }
+
+controller.blacklist = function(packages) {
+    _.forIn(blacklist, function(value, key) {
+        delete packages[key];
+    });
+
+    return packages;
+};
 
 module.exports = controller;
