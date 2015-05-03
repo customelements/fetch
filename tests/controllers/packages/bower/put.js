@@ -1,8 +1,9 @@
-var assert = require('chai').assert;
-var controller = require('../../../controllers/packages/bower/put');
+var Lab = require('lab');
+var lab = exports.lab = Lab.script();
 
-describe('PUT /packages/bower', function() {
-    describe('controller', function() {
-        // TODO: Write test case
-    });
+var assert = require('chai').assert;
+var server = require('../../../../');
+
+lab.experiment('PUT /packages/bower', function() {
+    // TODO: Write test case
 });

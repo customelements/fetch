@@ -35,7 +35,11 @@ server.register({
         throw err;
     }
 
-    server.start(function () {
-        server.log('info', 'Server running at: ' + server.info.uri);
-    });
+    if (!module.parent) {
+        server.start(function () {
+            server.log('info', 'Server running at: ' + server.info.uri);
+        });
+    }
 });
+
+module.exports = server;

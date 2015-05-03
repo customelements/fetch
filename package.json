@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha tests/**/*"
+    "test": "lab tests"
   },
   "dependencies": {
     "boom": "^2.6.1",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "chai": "^2.1.0",
-    "mocha": "^2.1.0"
+    "lab": "^5.8.0"
   },
   "engines": {
     "node": "0.12",
