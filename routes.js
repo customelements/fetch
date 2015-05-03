@@ -10,6 +10,11 @@ module.exports = [
     },
     {
         method: 'GET',
+        path: '/limit',
+        handler: require('./controllers/limit/get.js')
+    },
+    {
+        method: 'GET',
         path: '/repos',
         handler: function(request, reply) {
             return db.get('all').then(reply).catch(reply);

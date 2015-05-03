@@ -10,6 +10,25 @@ Built with [Node](http://nodejs.org/), [Hapi](http://hapijs.com/), and [Redis](h
 
 ## APIs
 
+
+### GET `/limit`
+
+Returns GitHub's API current rate limit.
+
+```bash
+curl -X GET fetch.customelements.io/limit
+```
+
+```js
+{
+    "limit": 5000,
+    "remaining": 5000,
+    "reset": 1427122269
+}
+```
+
+---
+
 ### PUT `/repos`
 
 1. Fetches `/packages`.
@@ -18,7 +37,7 @@ Built with [Node](http://nodejs.org/), [Hapi](http://hapijs.com/), and [Redis](h
 4. Saves result data into Redis.
 
 ```bash
-curl -X PUT fetch.customelements.io
+curl -X PUT fetch.customelements.io/repos
 ```
 
 ---
@@ -28,7 +47,7 @@ curl -X PUT fetch.customelements.io
 1. Gets data from Redis based on the operation above.
 
 ```bash
-curl -X GET fetch.customelements.io
+curl -X GET fetch.customelements.io/repos
 ```
 
 ```js
