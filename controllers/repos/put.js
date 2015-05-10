@@ -33,14 +33,14 @@ controller.fetchAll = function(packages, request) {
         var url = githubUrl(key);
 
         promises.push(
-            controller.fetchRepo(url.user, url.repo, value, request)
+            controller.fetchRepo(url.user, url.repo, request)
         );
     });
 
     return Promise.all(promises);
 };
 
-controller.fetchRepo = function(owner, name, pkg, request) {
+controller.fetchRepo = function(owner, name, request) {
     return new Promise(function(resolve, reject) {
         github().repos.get({
             user: owner,
@@ -63,67 +63,30 @@ controller.fetchRepo = function(owner, name, pkg, request) {
             }
             else {
                 request.log(['#fetchRepo'], 'Request succeed: ' + owner + '/' + name);
-                resolve([pkg, repo]);
+                resolve(repo);
             }
         });
     });
 };
 
-controller.reduce = function(data, request) {
+controller.reduce = function(repos, request) {
     var reducedData = {};
 
-    data.forEach(function(elem) {
-        request.log(['#reduce'], 'Create repository: ' + elem[1].full_name);
+    repos.forEach(function(repo) {
+        request.log(['#reduce'], 'Create repository: ' + repo.full_name);
 
-        var repo = {
-            github: {
-                id: elem[1].id,
-                name: elem[1].name,
-                full_name: elem[1].full_name,
-                description: elem[1].description,
-                html_url: elem[1].html_url,
-                homepage: elem[1].homepage,
-                size: elem[1].size,
-
-                created_at: elem[1].created_at,
-                updated_at: elem[1].updated_at,
-                pushed_at: elem[1].pushed_at,
-
-                subscribers_count: elem[1].subscribers_count,
-                open_issues_count: elem[1].open_issues_count,
-                stargazers_count: elem[1].stargazers_count,
-                forks_count: elem[1].forks_count,
-
-                has_issues: elem[1].has_issues,
-                has_downloads: elem[1].has_downloads,
-                has_wiki: elem[1].has_wiki,
-                has_pages: elem[1].has_pages,
-
-                owner: {
-                    id: elem[1].owner.id,
-                    login: elem[1].owner.login,
-                    avatar_url: elem[1].owner.avatar_url,
-                    html_url: elem[1].owner.html_url
-                }
-            }
+        var obj = {
+            id: repo.id,
+            name: repo.name,
+            owner: repo.owner.login,
+            description: repo.description,
+            created_at: repo.created_at,
+            updated_at: repo.updated_at,
+            stargazers_count: repo.stargazers_count,
+            forks_count: repo.forks_count
         };
 
-        if (elem[0].bower) {
-            repo.bower = {
-                name: elem[0].bower.name,
-                keywords: elem[0].bower.keywords
-            };
-        }
-
-        if (elem[0].npm) {
-            repo.npm = {
-                name: elem[0].npm.name,
-                keywords: elem[0].npm.keywords
-            };
-        }
-
-        var ghID = repo.github.id;
-        reducedData[ghID] = repo;
+        reducedData[repo.id] = obj;
     });
 
     return reducedData;
