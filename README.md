@@ -10,24 +10,6 @@ Built with [Node](http://nodejs.org/), [Hapi](http://hapijs.com/), and [Redis](h
 
 ## API endpoints
 
-### GET `/limit`
-
-Returns GitHub's API current rate limit.
-
-```bash
-curl -X GET fetch.customelements.io/limit
-```
-
-```js
-{
-    "limit": 5000,
-    "remaining": 5000,
-    "reset": 1427122269
-}
-```
-
----
-
 ### PUT `/repos`
 
 1. Fetches `/packages`.
@@ -52,40 +34,14 @@ curl -X GET fetch.customelements.io/repos
 ```js
 {
     "22607013": {
-        "bower": {
-            "name": "amazeui",
-            "keywords": ["web-components"]
-        },
-        "npm": {
-            "name": "amazeui",
-            "keywords": ["web-components"]
-        },
-        "github": {
-            "id": 22607013,
-            "name": "amazeui",
-            "full_name": "allmobilize/amazeui",
-            "description": "Amaze UI, a mobile-first and modular front-end framework.",
-            "html_url": "https://github.com/allmobilize/amazeui",
-            "homepage": "http://amazeui.org/",
-            "size": 20935,
-            "created_at": "2014-08-04T14:23:37Z",
-            "updated_at": "2015-03-10T10:35:39Z",
-            "pushed_at": "2015-03-09T07:46:24Z",
-            "subscribers_count": 304,
-            "open_issues_count": 28,
-            "stargazers_count": 2577,
-            "forks_count": 855,
-            "has_issues": true,
-            "has_downloads": true,
-            "has_wiki": true,
-            "has_pages": false,
-            "owner": {
-                "id": 3197643,
-                "login": "allmobilize",
-                "avatar_url": "https://avatars.githubusercontent.com/u/3197643?v=3",
-                "html_url": "https://github.com/allmobilize"
-            }
-        }
+        id: 2274210,
+        name: "dtreemap",
+        owner: "ibm-js",
+        description: "TreeMap Custom Element",
+        created_at: "2011-08-26T13:32:32Z",
+        updated_at: "2015-05-05T11:36:27Z",
+        stargazers_count: 9,
+        forks_count: 8
     },
     {...}
 }
@@ -197,6 +153,24 @@ curl -X GET fetch.customelements.io/packages/npm
         }
     },
     {...}
+}
+```
+
+---
+
+### GET `/limit`
+
+Returns GitHub's API current rate limit.
+
+```bash
+curl -X GET fetch.customelements.io/limit
+```
+
+```js
+{
+    "limit": 5000,
+    "remaining": 5000,
+    "reset": 1427122269
 }
 ```
 
