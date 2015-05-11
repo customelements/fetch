@@ -10,6 +10,8 @@ Built with [Node](http://nodejs.org/), [Hapi](http://hapijs.com/), and [Redis](h
 
 ## API endpoints
 
+> Note: This API is not versioned and may be changed at any moment. Use at your own risk.
+
 ### PUT `/repos`
 
 1. Fetches `/packages`.
@@ -39,7 +41,7 @@ curl -X GET fetch.customelements.io/repos
         owner: "ibm-js",
         description: "TreeMap Custom Element",
         created_at: "2011-08-26T13:32:32Z",
-        updated_at: "2015-05-05T11:36:27Z",
+        pushed_at: "2015-05-05T11:36:27Z",
         stargazers_count: 9,
         forks_count: 8
     },
