@@ -1,3 +1,12 @@
-{
-    "allmobilize/amazeui": {}
-}
+[
+    "allmobilize/amazeui",
+    "Polymer/polymer",
+    "x-tag/core",
+    "webcomponents/generator-element",
+    "webcomponents/polymer-boilerplate",
+    "webcomponents/x-tag-boilerplate",
+    "webcomponents/element-boilerplate",
+    "webcomponents/hello-world-polymer",
+    "webcomponents/hello-world-xtag",
+    "webcomponents/hello-world-element"
+]

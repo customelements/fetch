@@ -29,9 +29,9 @@ function controller(request, reply) {
 }
 
 controller.blacklist = function(packages) {
-    _.forIn(blacklist, function(value, key) {
-        delete packages[key];
-    });
+    for (var i = 0; i < blacklist.length; i++) {
+        delete packages[blacklist[i]];
+    }
 
     return packages;
 };
