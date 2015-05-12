@@ -9,7 +9,7 @@ function controller(request, reply) {
 
 controller.rateLimit = function() {
     return new Promise(function(resolve, reject) {
-        github().misc.rateLimit({}, function(error, result) {
+        github.misc.rateLimit({}, function(error, result) {
             if (error) {
                 var err = error.toJSON();
                 var errorCode = parseInt(err.code, 10);

@@ -42,7 +42,7 @@ controller.fetchAll = function(packages, request) {
 
 controller.fetchRepo = function(owner, name, request) {
     return new Promise(function(resolve, reject) {
-        github().repos.get({
+        github.repos.get({
             user: owner,
             repo: name
         }, function(error, repo) {
