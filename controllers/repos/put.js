@@ -9,38 +9,38 @@ function controller(request, reply) {
     fetch('http://fetch.customelements.io/packages')
         .then(function(result) {
             request.log(['#fetch'], 'Done with promise');
-            return controller.fetchAll(result, request);
+            return controller.fetchAll(result);
         })
         .then(function(result) {
             request.log(['#fetchAll'], 'Done with promise');
-            return controller.reduce(result, request);
+            return controller.reduce(result);
         })
         .then(function(result) {
             request.log(['#reduce'], 'Done with promise');
             return db.set('all', result);
         })
-        .then(function() {
+        .then(function(result) {
             request.log(['#db.set'], 'Done with promise');
-            return reply().code(200);
+            return reply({ fetched: Object.keys(result).length });
         })
         .catch(reply);
 }
 
-controller.fetchAll = function(packages, request) {
+controller.fetchAll = function(packages) {
     var promises = [];
 
     _.forIn(packages, function(value, key) {
         var url = githubUrl(key);
 
         promises.push(
-            controller.fetchRepo(url.user, url.repo, request)
+            controller.fetchRepo(url.user, url.repo)
         );
     });
 
     return Promise.all(promises);
 };
 
-controller.fetchRepo = function(owner, name, request) {
+controller.fetchRepo = function(owner, name) {
     return new Promise(function(resolve, reject) {
         github.repos.get({
             user: owner,
@@ -58,23 +58,19 @@ controller.fetchRepo = function(owner, name, request) {
                     errorMsg = err.message;
                 }
 
-                request.log(['#fetchRepo'], 'Request failed: ' + owner + '/' + name);
                 reject(boom.create(errorCode, errorMsg));
             }
             else {
-                request.log(['#fetchRepo'], 'Request succeed: ' + owner + '/' + name);
                 resolve(repo);
             }
         });
     });
 };
 
-controller.reduce = function(repos, request) {
+controller.reduce = function(repos) {
     var reducedData = {};
 
     repos.forEach(function(repo) {
-        request.log(['#reduce'], 'Create repository: ' + repo.full_name);
-
         var obj = {
             id: repo.id,
             name: repo.name,

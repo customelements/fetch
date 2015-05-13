@@ -6,28 +6,26 @@ function controller(request, reply) {
     fetch('https://bower-component-list.herokuapp.com/keyword/web-components')
         .then(function(result) {
             request.log(['#fetch'], 'Done with promise');
-            return controller.reduce(result, request);
+            return controller.reduce(result);
         })
         .then(function(result) {
             request.log(['#reduce'], 'Done with promise');
             return db.set('packages:bower', result);
         })
-        .then(function() {
+        .then(function(result) {
             request.log(['#db.set'], 'Done with promise');
-            return reply().code(200);
+            return reply({ fetched: Object.keys(result).length });
         })
         .catch(reply);
 }
 
-controller.reduce = function(data, request) {
+controller.reduce = function(data) {
     var reducedData = {};
 
     data.forEach(function(elem) {
         if (!elem.website || !github.isValidUrl(elem.website)) {
             return;
         }
-
-        request.log(['#reduce'], 'Create bower package: ' + elem.name);
 
         var ghID = github.toShorthand(elem.website);
         var ghURL = github.toHttps(elem.website);

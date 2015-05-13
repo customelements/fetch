@@ -10,15 +10,15 @@ function controller(request, reply) {
         })
         .then(function(result) {
             request.log(['#fetchAll'], 'Done with promise');
-            return controller.reduce(result, request);
+            return controller.reduce(result);
         })
         .then(function(result) {
             request.log(['#reduce'], 'Done with promise');
             return db.set('packages:npm', result);
         })
-        .then(function() {
+        .then(function(result) {
             request.log(['#db.set'], 'Done with promise');
-            return reply().code(200);
+            return reply({ fetched: Object.keys(result).length });
         })
         .catch(reply);
 }
@@ -35,15 +35,13 @@ controller.fetchAll = function(packages) {
     return Promise.all(promises);
 };
 
-controller.reduce = function(data, request) {
+controller.reduce = function(data) {
     var reducedData = {};
 
     data.forEach(function(elem) {
         if (!elem.repository || !github.isValidUrl(elem.repository.url)) {
             return;
         }
-
-        request.log(['#reduce'], 'Create npm package: ' + elem.name);
 
         var ghID = github.toShorthand(elem.repository.url);
         var ghURL = github.toHttps(elem.repository.url);
@@ -64,7 +62,4 @@ controller.reduce = function(data, request) {
     return reducedData;
 };
 
-
-
 module.exports = controller;
-

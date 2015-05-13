@@ -21,9 +21,9 @@ function controller(request, reply) {
         request.log(['#blacklist'], 'Done with promise');
         return db.set('packages', result);
     })
-    .then(function() {
+    .then(function(result) {
         request.log(['#db.set'], 'Done with promise');
-        return reply().code(200);
+        return reply({ fetched: Object.keys(result).length });
     })
     .catch(reply);
 }
