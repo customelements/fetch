@@ -8,6 +8,10 @@
 
 Built with [Node](http://nodejs.org/), [Hapi](http://hapijs.com/), and [Redis](http://redis.io/). Hosted on [Heroku](https://heroku.com/). Monitored on [New Relic](https://newrelic.com/).
 
+## How it works?
+
+![Diagram](https://cloud.githubusercontent.com/assets/398893/7641642/e256a8bc-fa3f-11e4-8ee5-7ec7247eb797.png)
+
 ## API endpoints
 
 > Note: This API is not versioned and may be changed at any moment. Use at your own risk.
