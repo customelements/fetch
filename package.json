@@ -3,7 +3,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "lab tests"
+    "test": "lab tests -l -v"
   },
   "dependencies": {
     "boom": "^2.6.1",
@@ -19,7 +19,8 @@
   },
   "devDependencies": {
     "chai": "^2.1.0",
-    "lab": "^5.8.0"
+    "lab": "^5.8.0",
+    "sinon": "^1.14.1"
   },
   "engines": {
     "node": "0.12",
