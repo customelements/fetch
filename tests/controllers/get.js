@@ -1,17 +1,15 @@
-var Lab = require('lab');
-var lab = exports.lab = Lab.script();
-
 var assert = require('chai').assert;
+var mocha = require('mocha');
+var sinon = require('sinon');
+
 var server = require('../../server');
 
-lab.experiment('GET /', function() {
-    lab.test('should return HTTP 200 status code', function(done) {
-        var options = {
+describe('GET /', function() {
+    it('should return HTTP 200 status code', function(done) {
+        server.inject({
             method: 'GET',
             url: '/'
-        };
-
-        server.inject(options, function(response) {
+        }, function(response) {
             assert.equal(response.statusCode, 200);
             done();
         });

@@ -1,9 +1,9 @@
-var Lab = require('lab');
-var lab = exports.lab = Lab.script();
-
 var assert = require('chai').assert;
+var mocha = require('mocha');
+var sinon = require('sinon');
+
 var server = require('../../../../server');
 
-lab.experiment('PUT /packages/npm', function() {
+describe('PUT /packages/npm', function() {
     // TODO: Write test case
 });

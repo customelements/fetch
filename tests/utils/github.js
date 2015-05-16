@@ -1,31 +1,28 @@
-var Lab = require('lab');
-var lab = exports.lab = Lab.script();
 var assert = require('chai').assert;
+var mocha = require('mocha');
 var sinon = require('sinon');
+
 var github = require('../../utils/github');
 
-lab.describe('utils/github.js', function() {
-    lab.describe('isValidUrl()', function() {
-        lab.it('should return true if it is a github.com URL', function(done) {
+describe('utils/github.js', function() {
+    describe('#isValidUrl()', function() {
+        it('should return true if it is a github.com URL', function() {
             var result = github.isValidUrl('https://github.com/allmobilize/amazeui');
             assert.equal(result, true);
-            done();
         });
     });
 
-    lab.describe('toShorthand()', function() {
-        lab.it('should return GitHub repo full name', function(done) {
+    describe('#toShorthand()', function() {
+        it('should return GitHub repo full name', function() {
             var result = github.toShorthand('https://github.com/allmobilize/amazeui');
             assert.equal(result, 'allmobilize/amazeui');
-            done();
         });
     });
 
-    lab.describe('toHttps()', function() {
-        lab.it('should return a HTTPS url', function(done) {
+    describe('#toHttps()', function() {
+        it('should return a HTTPS url', function() {
             var result = github.toHttps('http://github.com/allmobilize/amazeui');
             assert.equal(result, 'https://github.com/allmobilize/amazeui');
-            done();
         });
     });
 });
