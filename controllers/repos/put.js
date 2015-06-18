@@ -58,7 +58,12 @@ controller.fetchRepo = function(owner, name) {
                     errorMsg = err.message;
                 }
 
-                reject(boom.create(errorCode, errorMsg));
+                if (errorCode === 404) {
+                    resolve();
+                }
+                else {
+                    reject(boom.create(errorCode, errorMsg));
+                }
             }
             else {
                 resolve(repo);
@@ -71,18 +76,20 @@ controller.reduce = function(repos) {
     var reducedData = {};
 
     repos.forEach(function(repo) {
-        var obj = {
-            id: repo.id,
-            name: repo.name,
-            owner: repo.owner.login,
-            description: repo.description,
-            created_at: repo.created_at,
-            pushed_at: repo.pushed_at,
-            stargazers_count: repo.stargazers_count,
-            forks_count: repo.forks_count
-        };
+        if (repo) {
+            var obj = {
+                id: repo.id,
+                name: repo.name,
+                owner: repo.owner.login,
+                description: repo.description,
+                created_at: repo.created_at,
+                pushed_at: repo.pushed_at,
+                stargazers_count: repo.stargazers_count,
+                forks_count: repo.forks_count
+            };
 
-        reducedData[repo.id] = obj;
+            reducedData[repo.id] = obj;
+        }
     });
 
     return reducedData;
