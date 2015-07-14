@@ -80,7 +80,10 @@ controller.reduce = function(repos) {
             var obj = {
                 id: repo.id,
                 name: repo.name,
-                owner: repo.owner.login,
+                owner: {
+                    id: repo.owner.id,
+                    login: repo.owner.login
+                },
                 description: repo.description,
                 created_at: repo.created_at,
                 pushed_at: repo.pushed_at,
