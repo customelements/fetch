@@ -26,6 +26,17 @@ module.exports = [
     },
     {
         method: 'GET',
+        path: '/owners',
+        handler: function(request, reply) {
+            return db.get('owners').then(reply).catch(reply);
+        }
+    }, {
+        method: 'PUT',
+        path: '/owners',
+        handler: require('./controllers/owners/put.js')
+    },
+    {
+        method: 'GET',
         path: '/packages',
         handler: function(request, reply) {
             return db.get('packages').then(reply).catch(reply);
