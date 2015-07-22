@@ -78,7 +78,16 @@ controller.fetchOwner = function(owner) {
                 }
             }
             else {
-                resolve(result);
+                if (repo.meta.location) {
+                    fetch(repo.meta.location)
+                        .then(function(result) {
+                            resolve(result);
+                        })
+                        .catch(reject);
+                }
+                else {
+                    resolve(repo);
+                }
             }
         });
     });

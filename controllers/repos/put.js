@@ -66,7 +66,17 @@ controller.fetchRepo = function(owner, name) {
                 }
             }
             else {
-                resolve(repo);
+                if (repo.meta.location) {
+                    fetch(repo.meta.location)
+                        .then(function(result) {
+                            resolve(result);
+                        })
+                        .catch(reject);
+                }
+                else {
+                    resolve(repo);
+                }
+
             }
         });
     });
