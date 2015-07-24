@@ -57,7 +57,7 @@ controller.fetchOwner = function(owner) {
     return new Promise(function(resolve, reject) {
         github.user.getFrom({
             user: owner
-        }, function(error, result) {
+        }, function(error, owner) {
             if (error) {
                 var err = error.toJSON();
                 var errorCode = parseInt(err.code, 10);
@@ -78,15 +78,15 @@ controller.fetchOwner = function(owner) {
                 }
             }
             else {
-                if (repo.meta.location) {
-                    fetch(repo.meta.location)
+                if (owner.meta.location) {
+                    fetch(owner.meta.location)
                         .then(function(result) {
                             resolve(result);
                         })
                         .catch(reject);
                 }
                 else {
-                    resolve(repo);
+                    resolve(owner);
                 }
             }
         });
