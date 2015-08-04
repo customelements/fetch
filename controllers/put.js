@@ -3,7 +3,7 @@ var db = require('../utils/db');
 var fetch = require('../utils/fetch');
 
 function controller(request, reply) {
-    fetch('http://zeno.local:3000/repos')
+    fetch('https://fetch.customelements.io/repos')
         .then(function(result) {
             request.log(['#fetch'], 'Done with promise');
             return controller.fetchAll(result);
