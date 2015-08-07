@@ -27,20 +27,16 @@ controller.reduce = function(data) {
             return;
         }
 
-        var ghID = github.toShorthand(elem.website);
-        var ghURL = github.toHttps(elem.website);
+        var ghFullName = github.toShorthand(elem.website);
 
         var pkg = {
             bower: {
                 name: elem.name,
                 keywords: elem.keywords
-            },
-            github: {
-                url: ghURL
             }
         };
 
-        reducedData[ghID] = pkg;
+        reducedData[ghFullName] = pkg;
     });
 
     return reducedData;

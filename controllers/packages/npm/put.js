@@ -43,20 +43,16 @@ controller.reduce = function(data) {
             return;
         }
 
-        var ghID = github.toShorthand(elem.repository.url);
-        var ghURL = github.toHttps(elem.repository.url);
+        var ghFullName = github.toShorthand(elem.repository.url);
 
         var pkg = {
             npm: {
                 name: elem.name,
                 keywords: elem.keywords
-            },
-            github: {
-                url: ghURL
             }
         };
 
-        reducedData[ghID] = pkg;
+        reducedData[ghFullName] = pkg;
     });
 
     return reducedData;
