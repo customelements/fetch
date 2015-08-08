@@ -3,17 +3,13 @@ var db = require('../utils/db');
 var fetch = require('../utils/fetch');
 
 function controller(request, reply) {
-    fetch('https://fetch.customelements.io/repos')
+    fetch('http://fetch.customelements.io/repos')
         .then(function(result) {
             request.log(['#fetch'], 'Done with promise');
             return controller.fetchAll(result);
         })
         .then(function(result) {
             request.log(['#fetchAll'], 'Done with promise');
-            return controller.reduce(result);
-        })
-        .then(function(result) {
-            request.log(['#reduce'], 'Done with promise');
             return db.set('all', result);
         })
         .then(function(result) {
@@ -26,25 +22,58 @@ function controller(request, reply) {
 controller.fetchAll = function(repos) {
     var promises = [];
 
-    _.forIn(repos, function(repo) {
+    _.forIn(repos, function(value, key) {
         promises.push(
-            fetch('https://raw.githubusercontent.com/' + repo.owner + '/' + repo.name + '/' + repo.default_branch + '/bower.json')
+            controller.fetchRepo(repos[key])
         );
     });
 
     return Promise.all(promises);
 };
 
-controller.reduce = function(result) {
-    var reducedData = {};
+controller.fetchRepo = function(repo) {
+    return new Promise(function(resolve, reject) {
+        Promise.all([
+            controller.fetchBower(repo),
+            controller.fetchNpm(repo)
+        ])
+        .then(function(results) {
+            resolve(_.merge(results[0], results[1]));
+        })
+        .catch(reject);
+    });
+};
 
-    console.log(result.statusCode);
+controller.fetchBower = function(repo) {
+    return new Promise(function(resolve, reject) {
+        if (repo.bower) {
+            fetch('https://raw.githubusercontent.com/' + repo.owner.login + '/' + repo.name + '/' + repo.default_branch + '/bower.json')
+                .then(function(bowerJSON) {
+                    repo.bower.dependencies = bowerJSON.dependencies;
+                    resolve(repo);
+                })
+                .catch(reject);
+        }
+        else {
+            resolve(repo);
+        }
+    });
+};
 
-    // entries.forEach(function(entry) {
-    //     console.log(entry);
-    // });
-
-    return reducedData;
+controller.fetchNpm = function(repo) {
+    return new Promise(function(resolve, reject) {
+        if (repo.npm) {
+            fetch('https://raw.githubusercontent.com/' + repo.owner.login + '/' + repo.name + '/' + repo.default_branch + '/package.json')
+                .then(function(packageJSON) {
+                    repo.npm.dependencies = packageJSON.dependencies;
+                    resolve(repo);
+                })
+                .catch(reject);
+        }
+        else {
+            resolve(repo);
+        }
+    });
 };
 
 module.exports = controller;
