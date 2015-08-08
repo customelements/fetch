@@ -30,21 +30,21 @@ controller.fetchAll = function(packages) {
     var promises = [];
 
     _.forIn(packages, function(value, key) {
-        var url = githubUrl(key);
-
         promises.push(
-            controller.fetchRepo(url.user, url.repo)
+            controller.fetchRepo(key, packages[key])
         );
     });
 
     return Promise.all(promises);
 };
 
-controller.fetchRepo = function(owner, name) {
+controller.fetchRepo = function(pkgName, pkg) {
     return new Promise(function(resolve, reject) {
+        var url = githubUrl(pkgName);
+
         github.repos.get({
-            user: owner,
-            repo: name
+            user: url.user,
+            repo: url.repo
         }, function(error, repo) {
             if (error) {
                 var err = error.toJSON();
@@ -74,6 +74,9 @@ controller.fetchRepo = function(owner, name) {
                         .catch(reject);
                 }
                 else {
+                    repo.bower = pkg.bower;
+                    repo.npm = pkg.npm;
+
                     resolve(repo);
                 }
 
@@ -90,15 +93,17 @@ controller.reduce = function(repos) {
             var obj = {
                 id: repo.id,
                 name: repo.name,
+                description: repo.description,
                 owner: {
                     id: repo.owner.id,
                     login: repo.owner.login
                 },
-                description: repo.description,
                 created_at: repo.created_at,
                 pushed_at: repo.pushed_at,
+                forks_count: repo.forks_count,
                 stargazers_count: repo.stargazers_count,
-                forks_count: repo.forks_count
+                bower: repo.bower,
+                npm: repo.npm
             };
 
             reducedData[repo.id] = obj;
