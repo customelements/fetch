@@ -102,6 +102,7 @@ controller.reduce = function(repos) {
                 pushed_at: repo.pushed_at,
                 forks_count: repo.forks_count,
                 stargazers_count: repo.stargazers_count,
+                default_branch: repo.default_branch,
                 bower: repo.bower,
                 npm: repo.npm
             };
