@@ -17,7 +17,7 @@ function controller(request, reply) {
         })
         .then(function(result) {
             request.log(['#reduce'], 'Done with promise');
-            return db.set('all', result);
+            return db.set('repos', result);
         })
         .then(function(result) {
             request.log(['#db.set'], 'Done with promise');

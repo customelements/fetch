@@ -17,7 +17,7 @@ module.exports = [
         method: 'GET',
         path: '/repos',
         handler: function(request, reply) {
-            return db.get('all').then(reply).catch(reply);
+            return db.get('repos').then(reply).catch(reply);
         }
     }, {
         method: 'PUT',
