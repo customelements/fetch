@@ -17,7 +17,7 @@ function controller(request, reply) {
         })
         .then(function(result) {
             request.log(['#reduce'], 'Done with promise');
-            return db.set('all', result);
+            return db.set('repos', result);
         })
         .then(function(result) {
             request.log(['#db.set'], 'Done with promise');
@@ -102,6 +102,7 @@ controller.reduce = function(repos) {
                 pushed_at: repo.pushed_at,
                 forks_count: repo.forks_count,
                 stargazers_count: repo.stargazers_count,
+                default_branch: repo.default_branch,
                 bower: repo.bower,
                 npm: repo.npm
             };

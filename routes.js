@@ -5,19 +5,19 @@ module.exports = [
         method: 'GET',
         path: '/',
         handler: function(request, reply) {
-            return reply().code(200);
+            return db.get('all').then(reply).catch(reply);
         }
     },
     {
-        method: 'GET',
-        path: '/limit',
-        handler: require('./controllers/limit/get.js')
+        method: 'PUT',
+        path: '/',
+        handler: require('./controllers/put.js')
     },
     {
         method: 'GET',
         path: '/repos',
         handler: function(request, reply) {
-            return db.get('all').then(reply).catch(reply);
+            return db.get('repos').then(reply).catch(reply);
         }
     }, {
         method: 'PUT',
@@ -65,5 +65,10 @@ module.exports = [
         method: 'PUT',
         path: '/packages/npm',
         handler: require('./controllers/packages/npm/put.js')
+    },
+    {
+        method: 'GET',
+        path: '/limit',
+        handler: require('./controllers/limit/get.js')
     }
 ];
