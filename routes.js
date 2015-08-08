@@ -5,13 +5,8 @@ module.exports = [
         method: 'GET',
         path: '/',
         handler: function(request, reply) {
-            return db.get('all').then(reply).catch(reply);
+            return reply().code(200);
         }
-    },
-    {
-        method: 'PUT',
-        path: '/',
-        handler: require('./controllers/put.js')
     },
     {
         method: 'GET',
@@ -23,6 +18,17 @@ module.exports = [
         method: 'PUT',
         path: '/repos',
         handler: require('./controllers/repos/put.js')
+    },
+    {
+        method: 'GET',
+        path: '/repos/partial',
+        handler: function(request, reply) {
+            return db.get('repos:partial').then(reply).catch(reply);
+        }
+    }, {
+        method: 'PUT',
+        path: '/repos/partial',
+        handler: require('./controllers/repos/partial/put.js')
     },
     {
         method: 'GET',

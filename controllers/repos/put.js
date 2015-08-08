@@ -1,22 +1,15 @@
 var _ = require('lodash');
-var boom = require('boom');
 var db = require('../../utils/db');
 var fetch = require('../../utils/fetch');
-var github = require('../../configs/github');
-var githubUrl = require('github-url-to-object');
 
 function controller(request, reply) {
-    fetch('http://fetch.customelements.io/packages')
+    fetch('http://zeno.local:3000/repos/partial')
         .then(function(result) {
             request.log(['#fetch'], 'Done with promise');
             return controller.fetchAll(result);
         })
         .then(function(result) {
             request.log(['#fetchAll'], 'Done with promise');
-            return controller.reduce(result);
-        })
-        .then(function(result) {
-            request.log(['#reduce'], 'Done with promise');
             return db.set('repos', result);
         })
         .then(function(result) {
@@ -26,92 +19,61 @@ function controller(request, reply) {
         .catch(reply);
 }
 
-controller.fetchAll = function(packages) {
+controller.fetchAll = function(repos) {
     var promises = [];
 
-    _.forIn(packages, function(value, key) {
+    _.forIn(repos, function(value, key) {
         promises.push(
-            controller.fetchRepo(key, packages[key])
+            controller.fetchRepo(repos[key])
         );
     });
 
     return Promise.all(promises);
 };
 
-controller.fetchRepo = function(pkgName, pkg) {
+controller.fetchRepo = function(repo) {
     return new Promise(function(resolve, reject) {
-        var url = githubUrl(pkgName);
-
-        github.repos.get({
-            user: url.user,
-            repo: url.repo
-        }, function(error, repo) {
-            if (error) {
-                var err = error.toJSON();
-                var errorCode = parseInt(err.code, 10);
-                var errorMsg = '';
-
-                try {
-                    errorMsg = JSON.parse(err.message).message;
-                }
-                catch(e) {
-                    errorMsg = err.message;
-                }
-
-                if (errorCode === 404) {
-                    resolve();
-                }
-                else {
-                    reject(boom.create(errorCode, errorMsg));
-                }
-            }
-            else {
-                if (repo.meta.location) {
-                    fetch(repo.meta.location)
-                        .then(function(result) {
-                            resolve(result);
-                        })
-                        .catch(reject);
-                }
-                else {
-                    repo.bower = pkg.bower;
-                    repo.npm = pkg.npm;
-
-                    resolve(repo);
-                }
-
-            }
-        });
+        Promise.all([
+            controller.fetchBower(repo),
+            controller.fetchNpm(repo)
+        ])
+        .then(function(results) {
+            resolve(_.merge(results[0], results[1]));
+        })
+        .catch(reject);
     });
 };
 
-controller.reduce = function(repos) {
-    var reducedData = {};
-
-    repos.forEach(function(repo) {
-        if (repo) {
-            var obj = {
-                id: repo.id,
-                name: repo.name,
-                description: repo.description,
-                owner: {
-                    id: repo.owner.id,
-                    login: repo.owner.login
-                },
-                created_at: repo.created_at,
-                pushed_at: repo.pushed_at,
-                forks_count: repo.forks_count,
-                stargazers_count: repo.stargazers_count,
-                default_branch: repo.default_branch,
-                bower: repo.bower,
-                npm: repo.npm
-            };
-
-            reducedData[repo.id] = obj;
+controller.fetchBower = function(repo) {
+    return new Promise(function(resolve, reject) {
+        if (repo.bower) {
+            fetch('https://raw.githubusercontent.com/' + repo.owner.login + '/' + repo.name + '/' + repo.default_branch + '/bower.json')
+                .then(function(bowerJSON) {
+                    repo.bower.dependencies = bowerJSON.dependencies;
+                    resolve(repo);
+                })
+                .catch(reject);
+        }
+        else {
+            resolve(repo);
         }
     });
+};
 
-    return reducedData;
+controller.fetchNpm = function(repo) {
+    return new Promise(function(resolve, reject) {
+        if (repo.npm) {
+            fetch('https://raw.githubusercontent.com/' + repo.owner.login + '/' + repo.name + '/' + repo.default_branch + '/package.json')
+                .then(function(packageJSON) {
+                    repo.npm.dependencies = packageJSON.dependencies;
+                    resolve(repo);
+                })
+                .catch(reject);
+        }
+        else {
+            resolve(repo);
+        }
+    });
 };
 
 module.exports = controller;
