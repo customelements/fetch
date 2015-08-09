@@ -50,6 +50,7 @@ controller.fetchBower = function(repo) {
             fetch('https://raw.githubusercontent.com/' + repo.owner.login + '/' + repo.name + '/' + repo.default_branch + '/bower.json')
                 .then(function(bowerJSON) {
                     repo.bower.dependencies = bowerJSON.dependencies;
+                    repo.bower.homepage = bowerJSON.homepage || "";
                     resolve(repo);
                 })
                 .catch(reject);
@@ -66,6 +67,7 @@ controller.fetchNpm = function(repo) {
             fetch('https://raw.githubusercontent.com/' + repo.owner.login + '/' + repo.name + '/' + repo.default_branch + '/package.json')
                 .then(function(packageJSON) {
                     repo.npm.dependencies = packageJSON.dependencies;
+                    repo.npm.homepage = packageJSON.homepage || "";
                     resolve(repo);
                 })
                 .catch(reject);
