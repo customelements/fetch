@@ -96,14 +96,21 @@ controller.reduce = function(repos) {
                 description: repo.description,
                 owner: {
                     id: repo.owner.id,
-                    login: repo.owner.login
+                    login: repo.owner.login,
+                    avatar_url: repo.owner.avatar_url
                 },
                 created_at: repo.created_at,
+                updated_at: repo.updated_at,
                 pushed_at: repo.pushed_at,
+                size: repo.size,
                 forks_count: repo.forks_count,
+                open_issues_count: repo.open_issues_count,
                 stargazers_count: repo.stargazers_count,
+                subscribers_count: repo.subscribers_count,
                 default_branch: repo.default_branch,
                 homepage: repo.homepage || "",
+                has_issues: repo.has_issues,
+                has_pages: repo.has_pages,
                 bower: repo.bower,
                 npm: repo.npm
             };
