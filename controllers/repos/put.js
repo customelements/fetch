@@ -1,6 +1,8 @@
 var _ = require('lodash');
+var boom = require('boom');
 var db = require('../../utils/db');
 var fetch = require('../../utils/fetch');
+var github = require('../../configs/github');
 
 function controller(request, reply) {
     fetch('http://fetch.customelements.io/repos/partial')
@@ -35,10 +37,13 @@ controller.fetchRepo = function(repo) {
     return new Promise(function(resolve, reject) {
         Promise.all([
             controller.fetchBower(repo),
-            controller.fetchNpm(repo)
+            controller.fetchNpm(repo),
+            controller.fetchReadme(repo)
         ])
         .then(function(results) {
-            resolve(_.merge(results[0], results[1]));
+            resolve(
+                _.merge(results[0], results[1], results[2])
+            );
         })
         .catch(reject);
     });
@@ -75,6 +80,26 @@ controller.fetchNpm = function(repo) {
         else {
             resolve(repo);
         }
+    });
+};
+
+controller.fetchReadme = function(repo) {
+    return new Promise(function(resolve, reject) {
+        github.repos.getReadme({
+            user: repo.owner.login,
+            repo: repo.name,
+            headers: {
+                'Accept': 'application/vnd.github.v3.html'
+            }
+        }, function(error, readme) {
+            if (error) {
+                resolve(repo);
+            }
+            else {
+                repo.readme = readme;
+                resolve(repo);
+            }
+        });
     });
 };
 
