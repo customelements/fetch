@@ -8,5 +8,6 @@
     "webcomponents/element-boilerplate",
     "webcomponents/hello-world-polymer",
     "webcomponents/hello-world-xtag",
-    "webcomponents/hello-world-element"
+    "webcomponents/hello-world-element",
+    "emarinizquierdo/google-people"
 ]
