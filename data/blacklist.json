@@ -1,5 +1,7 @@
 [
-    "allmobilize/amazeui",
+    "amazeui/amazeui",
+    "amazeui/amazeui-touch",
+    "amazeui/amazeui-react",
     "Polymer/polymer",
     "x-tag/core",
     "webcomponents/generator-element",
