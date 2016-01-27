@@ -63,6 +63,17 @@ module.exports = [
         handler: require('./controllers/packages/bower/put.js')
     }, {
         method: 'GET',
+        path: '/packages/bower/keywords/{keyword}',
+        handler: function(request, reply) {
+            var dbKey = 'packages:bower:' + request.params.keyword;
+            return db.get(dbKey).then(reply).catch(reply);
+        }
+    }, {
+        method: 'PUT',
+        path: '/packages/bower/keywords/{keyword}',
+        handler: require('./controllers/packages/bower/keywords/put.js')
+    }, {
+        method: 'GET',
         path: '/packages/npm',
         handler: function(request, reply) {
             return db.get('packages:npm').then(reply).catch(reply);
