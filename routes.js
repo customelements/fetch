@@ -82,8 +82,18 @@ module.exports = [
         method: 'PUT',
         path: '/packages/npm',
         handler: require('./controllers/packages/npm/put.js')
-    },
-    {
+    }, {
+        method: 'GET',
+        path: '/packages/npm/keywords/{keyword}',
+        handler: function(request, reply) {
+            var dbKey = 'packages:npm:' + request.params.keyword;
+            return db.get(dbKey).then(reply).catch(reply);
+        }
+    }, {
+        method: 'PUT',
+        path: '/packages/npm/keywords/{keyword}',
+        handler: require('./controllers/packages/npm/keywords/put.js')
+    }, {
         method: 'GET',
         path: '/limit',
         handler: require('./controllers/limit/get.js')
