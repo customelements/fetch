@@ -12,5 +12,7 @@
     "webcomponents/hello-world-polymer",
     "webcomponents/hello-world-xtag",
     "webcomponents/hello-world-element",
-    "emarinizquierdo/google-people"
+    "emarinizquierdo/google-people",
+    "devinivy/funk",
+    "devinivy/misbehave"
 ]
