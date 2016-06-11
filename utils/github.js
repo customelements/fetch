@@ -1,7 +1,8 @@
 var githubUrl = require('github-url-to-object');
+var isGithubUrl = require('is-github-url');
 
 exports.isValidUrl = function(url) {
-    return url.indexOf('github.com') > -1;
+    return isGithubUrl(url);
 };
 
 exports.toShorthand = function(url) {
