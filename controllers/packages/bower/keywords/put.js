@@ -3,7 +3,7 @@ var fetch = require('../../../../utils/fetch');
 var github = require('../../../../utils/github');
 
 function controller(request, reply) {
-    fetch('https://bower-component-list.herokuapp.com/keyword/' + request.params.keyword)
+    fetch('https://bowerwebcomponents.herokuapp.com/keyword/' + request.params.keyword)
         .then(function(result) {
             request.log(['#fetch'], 'Done with promise');
             return controller.reduce(result);
