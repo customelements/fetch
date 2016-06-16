@@ -37,12 +37,11 @@ controller.fetchRepo = function(repo) {
     return new Promise(function(resolve, reject) {
         Promise.all([
             controller.fetchBower(repo),
-            controller.fetchNpm(repo),
-            controller.fetchReadme(repo)
+            controller.fetchNpm(repo)
         ])
         .then(function(results) {
             resolve(
-                _.merge(results[0], results[1], results[2])
+                _.merge(results[0], results[1])
             );
         })
         .catch(reject);
@@ -101,26 +100,6 @@ controller.fetchNpm = function(repo) {
         else {
             resolve(repo);
         }
-    });
-};
-
-controller.fetchReadme = function(repo) {
-    return new Promise(function(resolve, reject) {
-        github.repos.getReadme({
-            user: repo.owner.login,
-            repo: repo.name,
-            headers: {
-                'Accept': 'application/vnd.github.v3.html'
-            }
-        }, function(error, readme) {
-            if (error) {
-                resolve(repo);
-            }
-            else {
-                repo.readme = readme;
-                resolve(repo);
-            }
-        });
     });
 };
 
